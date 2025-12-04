@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem } from '@heroui/react';
 
-const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8 } } };
-const staggerContainer = { visible: { transition: { staggerChildren: 0.2 } } };
+const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
+const staggerContainer = { visible: { transition: { staggerChildren: 0.15 } } };
+const slideInLeft = { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } };
+const slideInRight = { hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } };
 
 const BENEFITS = [
   { icon: Lightbulb, title: 'Ahorro inmediato', desc: 'Tu dispositivo usado se valora y ese monto se convierte en crédito o descuento para el nuevo. Esto permite reducir el costo al momento de la compra.', hoverColor: 'group-hover:text-yellow-400' },
@@ -62,16 +64,29 @@ function NavbarComponent() {
 }
 
 function Hero() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    setMousePosition({
+      x: (clientX / innerWidth - 0.5) * 20,
+      y: (clientY / innerHeight - 0.5) * 20
+    });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center px-6 overflow-hidden pt-20" style={{ backgroundColor: '#000000' }}>
+    <section className="relative min-h-screen flex items-center px-6 overflow-hidden pt-20" style={{ backgroundColor: '#000000' }} onMouseMove={handleMouseMove}>
       <div className="max-w-7xl mx-auto w-full">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-12">
           <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }}>
-            <Sparkles size={16} style={{ color: '#06B6D4' }} />
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}>
+              <Sparkles size={16} style={{ color: '#06B6D4' }} />
+            </motion.div>
             <span className="text-xs font-semibold tracking-wider" style={{ color: '#FFFFFF' }}>PLAN RETOMA 2025</span>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight" style={{ color: '#FFFFFF' }}>Renueva tu<br/>equipo</motion.h1>
-          <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#D1D5DB' }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
+          <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight" style={{ color: '#FFFFFF' }} animate={{ y: mousePosition.y * 0.5 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>Renueva tu<br/>equipo</motion.h1>
+          <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#D1D5DB' }} animate={{ y: mousePosition.y * 0.3 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 sm:gap-5 pt-6">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button className="text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
@@ -90,8 +105,8 @@ function Hero() {
                 key={i} 
                 initial={{ opacity: 0, x: -100 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
-                transition={{ delay: i * 0.1, duration: 0.6 }} 
-                whileHover={{ scale: 1.05, color: '#86EFAC' }}
+                transition={{ delay: i * 0.08, duration: 0.5 }} 
+                whileHover={{ scale: 1.08, color: '#86EFAC', y: -5 }}
                 className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}
               >
                 <div className="text-4xl md:text-5xl font-bold tracking-wide mb-4 md:mb-6" style={{ color: '#FFFFFF' }}>
@@ -111,7 +126,7 @@ function Benefits() {
     <section id="beneficios" className="py-40 px-6" style={{ backgroundColor: '#121212' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
+          <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-8">
             <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>APROVECHA TU EQUIPO USADO</span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Beneficios</h2>
             <p className="text-lg leading-relaxed" style={{ color: '#9CA3AF' }}>El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
@@ -121,10 +136,10 @@ function Benefits() {
               {BENEFITS.slice(0, 2).map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }}>
-                    <Card className="group p-8 rounded-3xl cursor-pointer" style={{ backgroundColor: '#FFFFFF' }}>
+                  <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15, scale: 1.05 }} className="group">
+                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#FFFFFF' }}>
                       <CardBody className="flex flex-col items-center text-center">
-                        <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
+                        <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                         </motion.div>
                         <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
@@ -139,10 +154,10 @@ function Benefits() {
               {BENEFITS.slice(2, 4).map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <motion.div key={idx + 2} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx + 2) * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }}>
-                    <Card className="group p-8 rounded-3xl cursor-pointer" style={{ backgroundColor: '#FFFFFF' }}>
+                  <motion.div key={idx + 2} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx + 2) * 0.08, duration: 0.5 }} whileHover={{ y: -15, scale: 1.05 }} className="group">
+                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#FFFFFF' }}>
                       <CardBody className="flex flex-col items-center text-center">
-                        <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
+                        <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                         </motion.div>
                         <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
@@ -164,17 +179,17 @@ function Steps() {
   return (
     <section id="como-funciona" className="py-40 px-6" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-32 space-y-6">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-32 space-y-6">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>PROCESO</span>
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }}>Tres pasos: Un nuevo equipo</h2>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {STEPS.map((step, idx) => {
             return (
-              <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10 }} className="relative text-center group cursor-pointer">
-                <Card className="relative z-10 w-28 h-28 rounded-3xl shadow-2xl flex items-center justify-center mx-auto mb-10" style={{ backgroundColor: '#FFFFFF', border: '4px solid #E0E0E0' }}>
+              <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15 }} className="relative text-center group cursor-pointer">
+                <Card className="relative z-10 w-28 h-28 rounded-3xl shadow-2xl hover:shadow-3xl flex items-center justify-center mx-auto mb-10 transition-shadow" style={{ backgroundColor: '#FFFFFF', border: '4px solid #E0E0E0' }}>
                   <CardBody className="flex items-center justify-center">
-                    <motion.div whileHover={{ scale: 1.1, rotate: 6 }}>
+                    <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }}>
                       <span className="text-5xl font-black" style={{ color: '#06B6D4' }}>{step.number}</span>
                     </motion.div>
                   </CardBody>
@@ -195,18 +210,18 @@ function Checklist() {
   return (
     <section id="recomendaciones" className="py-32 px-6" style={{ backgroundColor: '#1B1B1B' }}>
       <div className="max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-32 space-y-6">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-32 space-y-6">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>RECOMENDACIONES</span>
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Antes de entregar tu equipo</h2>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {CHECKLIST.map((item, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.5 }} whileHover={{ scale: 1.05 }}>
-              <Card className="group p-8 rounded-2xl cursor-pointer" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.08, x: 5 }}>
+              <Card className="group p-8 rounded-2xl cursor-pointer hover:shadow-lg transition-shadow" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <CardBody className="flex flex-row items-center gap-5">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(6,182,212,0.2)' }}>
+                  <motion.div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(6,182,212,0.2)' }} whileHover={{ rotate: 12 }}>
                     <CheckCircle style={{ color: '#06B6D4' }} size={24} />
-                  </div>
+                  </motion.div>
                   <span className="text-xl font-semibold" style={{ color: '#D1D5DB' }}>{item}</span>
                 </CardBody>
               </Card>
@@ -237,7 +252,7 @@ function FAQ() {
   return (
     <section id="faq" className="py-32 px-6" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
           <span className="text-[10px] uppercase font-bold tracking-[0.3em] mb-4 block" style={{ color: '#9CA3AF' }}>Dudas</span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4" style={{ color: '#1F2937' }}>Preguntas Frecuentes</h2>
           <p className="text-base uppercase tracking-[0.2em]" style={{ color: '#6E6E6E' }}>Todo sobre el Plan Retoma</p>
@@ -255,11 +270,11 @@ function FooterCTA() {
   return (
     <section id="contacto" className="relative py-32 px-6 text-center overflow-hidden" style={{ backgroundColor: '#1B1B1B' }}>
       <div className="relative z-10 max-w-4xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6" style={{ color: '#FFFFFF' }}>¿Listo para renovar tu equipo Apple?</h2>
           <p className="text-base sm:text-lg md:text-2xl mb-8 sm:mb-12" style={{ color: '#9CA3AF' }}>Agenda tu cita y obtén el mejor valor por tu dispositivo usado</p>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
+          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+            <Button className="text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#3B82F6' }}>
               Agendar Cita de Retoma
             </Button>
           </motion.div>
@@ -345,7 +360,7 @@ function Footer() {
 
 export default function App() {
   return (
-    <div className="font-poppins antialiased">
+    <motion.div className="font-poppins antialiased" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <NavbarComponent />
       <Hero />
       <Benefits />
@@ -354,6 +369,6 @@ export default function App() {
       <FAQ />
       <FooterCTA />
       <Footer />
-    </div>
+    </motion.div>
   );
 }
