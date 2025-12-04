@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Button } from '@heroui/react';
+import { Button, Spinner } from '@heroui/react';
 
 export function FooterCTA() {
   return (
@@ -42,8 +42,11 @@ export function FooterCTA() {
               className="w-full"
             >
               <Button
-                className="w-full text-white text-base px-8 sm:px-14 py-4 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition-all focus-visible:outline-2 focus-visible:outline-offset-2"
-                style={{ backgroundColor: '#0066CC' }}
+                size="lg"
+                color="primary"
+                variant="shadow"
+                className="w-1/2 text-white text-lg px-12 py-6 font-bold transition-all duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ backgroundColor: '#0066CC', borderRadius: '16px' }}
                 aria-label="Agendar cita de retoma"
               >
                 Agendar Cita

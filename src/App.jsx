@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Twitter, Linkedin, Menu, X } from 'lucide-react';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Image } from '@heroui/react';
+import { Facebook, Instagram, Twitter, Linkedin, Menu, X, HelpCircle } from 'lucide-react';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Image, Chip, ButtonGroup, Spinner, Avatar, Divider } from '@heroui/react';
 import { useSEO } from './hooks/useSEO';
 import { FooterCTA } from './components/FooterCTA';
 import { Hero } from './components/Hero';
@@ -109,7 +109,7 @@ function Products() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-16">
           {PRODUCTS.map((product, i) => (
             <motion.div key={i} initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08, duration: 0.5 }} whileHover={{ scale: 1.08, y: -5 }} className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}>
-              <Image src={product.img} alt={product.label} width={80} height={80} className="mx-auto mb-4 rounded-lg" isZoomed loading="lazy" />
+              <Avatar src={product.img} alt={product.label} size="xl" className="w-20 h-20 mx-auto mb-4" isBordered color="primary" />
               <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#1D1D1F' }}>{product.label}</div>
             </motion.div>
           ))}
@@ -178,14 +178,16 @@ function Steps() {
     <section id="como-funciona" className="py-32 px-8" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }} id="steps-heading">Tres pasos: Un nuevo equipo</h2>
+          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }} id="steps-heading">Tres pasos: un nuevo equipo</h2>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {STEPS.map((step, idx) => {
             return (
               <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15 }} className="relative text-center group cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
-                <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }} className="relative z-10 w-28 h-28 rounded-full shadow-2xl hover:shadow-3xl flex items-center justify-center mx-auto mb-10 transition-shadow" style={{ backgroundColor: '#000000', border: '4px solid #1a1a1a' }}>
-                  <span className="text-5xl font-black" style={{ color: '#FFFFFF' }}>{step.number}</span>
+                <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }} className="relative z-10 mx-auto mb-10">
+                  <Chip size="lg" variant="solid" color="primary" className="text-4xl font-black w-28 h-28 shadow-2xl hover:shadow-3xl transition-shadow" style={{ backgroundColor: '#000000', color: '#FFFFFF' }}>
+                    {step.number}
+                  </Chip>
                 </motion.div>
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }} aria-hidden="true">{idx + 1}</div>
                 <h3 className="text-4xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
@@ -231,9 +233,9 @@ function FAQ() {
 
   const FAQColumn = ({ faqs, startIdx }) => (
     <div className="space-y-4">
-      <Accordion>
+      <Accordion variant="splitted" selectionMode="multiple" hideIndicator>
         {faqs.map((faq, idx) => (
-          <AccordionItem key={startIdx + idx} title={faq.q} className="text-xl font-semibold focus-visible:outline-2 focus-visible:outline-offset-2" style={{ color: '#1F2937' }}>
+          <AccordionItem key={startIdx + idx} title={faq.q} className="text-xl font-semibold focus-visible:outline-2 focus-visible:outline-offset-2" style={{ color: '#1F2937' }} startContent={<HelpCircle size={20} style={{ color: '#0066CC' }} />}>
             <div className="text-base leading-relaxed" style={{ color: '#4B5563' }}>{faq.a}</div>
           </AccordionItem>
         ))}
@@ -295,13 +297,17 @@ function Newsletter() {
         <div className="p-8 rounded-2xl shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '1.125rem' }}>✓ ¡Gracias! Revisa tu correo.</div>
       ) : (
         <form onSubmit={handleSubmit} className="rounded-2xl p-2 shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <div className="flex flex-col sm:flex-row items-stretch gap-0">
+          <ButtonGroup className="w-full">
             <label htmlFor="newsletter-email" className="sr-only">Correo electrónico</label>
             <Input id="newsletter-email" type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1 text-base focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: 'transparent', color: '#FFFFFF' }} required />
-            <Button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 rounded-xl sm:rounded-l-none sm:rounded-r-xl mt-2 sm:mt-0 shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#3B82F6' }}>
-              {status === 'loading' ? 'Enviando...' : 'Suscribirse'}
+            <Button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#3B82F6' }}>
+              {status === 'loading' ? (
+                <><Spinner size="sm" className="mr-2" />Enviando...</>
+              ) : (
+                'Suscribirse'
+              )}
             </Button>
-          </div>
+          </ButtonGroup>
           {error && <p className="text-red-400 text-sm mt-2" role="alert">{error}</p>}
         </form>
       )}
@@ -312,9 +318,10 @@ function Newsletter() {
 function Footer() {
   return (
     <footer style={{ backgroundColor: '#000000' }}>
-      <div className="py-32" style={{ borderBottom: '1px solid #1B1B1B' }}>
+      <div className="py-32">
         <Newsletter />
       </div>
+      <Divider className="bg-gray-800" />
       <div className="max-w-7xl mx-auto py-16 px-6">
         <div className="flex justify-center space-x-8 mb-12">
           <a href="#" aria-label="Facebook" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
