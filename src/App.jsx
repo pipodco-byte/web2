@@ -95,24 +95,27 @@ function Benefits() {
   return (
     <section id="beneficios" className="py-40 px-6 bg-gray-900">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-32 space-y-6">
-          <span className="text-[10px] uppercase font-black tracking-[0.4em] text-gray-400">APROVECHA TU EQUIPO USADO</span>
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight text-white">Beneficios</h2>
-          <p className="text-xl text-gray-300">El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales</p>
-        </motion.div>
-        <div className="grid md:grid-cols-4 gap-10">
-          {BENEFITS.map((item, idx) => {
-            const IconComponent = item.icon;
-            return (
-              <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl border border-white/10 bg-white/5 hover:border-cyan-500/30 cursor-pointer">
-                <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
-                  <IconComponent size={32} className={`text-white transition-colors ${item.hoverColor}`} />
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
+            <span className="text-[10px] uppercase font-black tracking-[0.4em] text-gray-400">APROVECHA TU EQUIPO USADO</span>
+            <h2 className="text-6xl md:text-7xl font-black tracking-tight text-white">Beneficios</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-transparent"></div>
+            <p className="text-lg leading-relaxed text-gray-300">El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
+          </motion.div>
+          <div className="grid grid-cols-2 gap-6">
+            {BENEFITS.map((item, idx) => {
+              const IconComponent = item.icon;
+              return (
+                <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl border border-white/10 bg-white/5 hover:border-cyan-500/30 cursor-pointer">
+                  <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
+                    <IconComponent size={32} className={`text-white transition-colors ${item.hoverColor}`} />
+                  </motion.div>
+                  <h3 className="text-xl font-black text-white mb-3">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-gray-400">{item.desc}</p>
                 </motion.div>
-                <h3 className="text-xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-gray-400">{item.desc}</p>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
