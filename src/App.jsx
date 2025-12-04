@@ -134,8 +134,8 @@ function Benefits() {
               {BENEFITS.slice(0, 2).map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15, scale: 1.05 }} className="group">
-                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#FFFFFF' }}>
+                  <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15, scale: 1.05, boxShadow: '0 20px 40px rgba(0, 102, 204, 0.2)' }} className="group">
+                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#FFFFFF', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
                       <CardBody className="flex flex-col items-center text-center">
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
@@ -153,7 +153,7 @@ function Benefits() {
                 const IconComponent = item.icon;
                 return (
                   <motion.div key={idx + 2} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx + 2) * 0.08, duration: 0.5 }} whileHover={{ y: -15, scale: 1.05 }} className="group">
-                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#FFFFFF' }}>
+                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#FFFFFF', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
                       <CardBody className="flex flex-col items-center text-center">
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
@@ -175,7 +175,7 @@ function Benefits() {
 
 function Steps() {
   return (
-    <section id="como-funciona" className="py-32 px-8" style={{ backgroundColor: '#FFFFFF' }}>
+    <section id="como-funciona" className="py-32 px-8" style={{ backgroundColor: '#FFFFFF', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }} id="steps-heading">Tres pasos: un nuevo equipo</h2>
@@ -212,7 +212,7 @@ function Checklist() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {CHECKLIST.map((item, idx) => (
             <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.05, x: 5 }} className="flex items-start gap-4 focus-visible:outline-2 focus-visible:outline-offset-2 rounded p-2">
-              <motion.div whileHover={{ rotate: 12 }} className="flex-shrink-0 mt-1">
+              <motion.div whileHover={{ rotate: 12, scale: 1.2 }} animate={{ y: [0, -5, 0] }} transition={{ duration: 3, repeat: Infinity }} className="flex-shrink-0 mt-1">
                 <item.icon style={{ color: '#0066CC' }} size={28} />
               </motion.div>
               <div className="space-y-2">
@@ -244,7 +244,7 @@ function FAQ() {
   );
 
   return (
-    <section id="faq" className="py-32 px-6" style={{ backgroundColor: '#FFFFFF' }}>
+    <section id="faq" className="py-32 px-6" style={{ backgroundColor: '#FFFFFF', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
           <span className="text-[10px] uppercase font-bold tracking-[0.3em] mb-4 block" style={{ color: '#9CA3AF' }}>Dudas</span>
@@ -296,11 +296,11 @@ function Newsletter() {
       {status === 'success' ? (
         <div className="p-8 rounded-2xl shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '1.125rem' }}>✓ ¡Gracias! Revisa tu correo.</div>
       ) : (
-        <form onSubmit={handleSubmit} className="rounded-2xl p-2 shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
+        <form onSubmit={handleSubmit} className="rounded-2xl p-2 shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)' }}>
           <ButtonGroup className="w-full">
             <label htmlFor="newsletter-email" className="sr-only">Correo electrónico</label>
             <Input id="newsletter-email" type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1 text-base focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: 'transparent', color: '#FFFFFF' }} required />
-            <Button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#3B82F6' }}>
+            <Button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-gradient-to-r" style={{ backgroundColor: '#3B82F6', backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)' }}>
               {status === 'loading' ? (
                 <><Spinner size="sm" className="mr-2" />Enviando...</>
               ) : (
