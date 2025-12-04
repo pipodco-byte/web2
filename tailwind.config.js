@@ -12,25 +12,21 @@ module.exports = {
     extend: {
       colors: {
         pipod: {
-          black: '#000000',
-          charcoal: '#121212',
-          'dark-slate': '#1B1B1B',
           white: '#FFFFFF',
-          'off-white': '#F9FAFB',
-          'light-gray': '#F3F4F6',
-          'dark-gray': '#1F2937',
-          'cool-gray': '#4B5563',
-          'soft-gray': '#9CA3AF',
-          'dim-gray': '#6E6E6E',
-          silver: '#D1D5DB',
-          platinum: '#E0E0E0',
-          'blue-primary': '#3B82F6',
+          'light-gray': '#F5F5F7',
+          'gray-100': '#F3F4F6',
+          'gray-200': '#E5E5E7',
+          'gray-400': '#6E6E6E',
+          'gray-600': '#4B5563',
+          'gray-800': '#1D1D1F',
+          'blue-primary': '#0066CC',
+          'blue-secondary': '#3B82F6',
           cyan: '#06B6D4',
           'mint-green': '#86EFAC'
         }
       },
       fontFamily: {
-        poppins: ['"Poppins"', 'sans-serif'],
+        inter: ['"Inter"', 'sans-serif'],
       }
     }
   },
