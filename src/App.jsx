@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem } from '@heroui/react';
+import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin, Menu, X } from 'lucide-react';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from '@heroui/react';
+import { useSEO } from './hooks/useSEO';
 
 const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 const staggerContainer = { visible: { transition: { staggerChildren: 0.15 } } };
 const slideInLeft = { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } };
 const slideInRight = { hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } };
 
+// SEO: Agregar atributos alt a imágenes y aria-labels a botones
 const BENEFITS = [
   { icon: Lightbulb, title: 'Ahorro inmediato', desc: 'Tu dispositivo usado se valora y ese monto se convierte en crédito o descuento para el nuevo. Esto permite reducir el costo al momento de la compra.', hoverColor: 'group-hover:text-yellow-400' },
   { icon: Heart, title: 'Proceso transparente', desc: 'Revisamos tu equipo, te mostramos cómo llegamos al valor. Sabes lo que estás entregando, lo que vale y lo que recibirás.', hoverColor: 'group-hover:text-red-400' },
@@ -42,28 +44,94 @@ const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 function NavbarComponent() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      
+      const sections = ['beneficios', 'como-funciona', 'recomendaciones', 'faq'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navLinks = [
+    { label: 'Beneficios', href: '#beneficios' },
+    { label: 'Cómo funciona', href: '#como-funciona' },
+    { label: 'Recomendaciones', href: '#recomendaciones' },
+    { label: 'FAQ', href: '#faq' }
+  ];
+
+  const handleNavClick = () => setMobileOpen(false);
+
   return (
-    <Navbar isBordered={scrolled} className={`fixed z-50 transition-all duration-300 ${scrolled ? 'bg-gray-100/95 backdrop-blur-sm' : 'bg-transparent'}`}>
-      <NavbarBrand>
-        <div className={`text-3xl font-bold ${scrolled ? 'text-black' : 'text-white'}`}>Pipod</div>
-      </NavbarBrand>
-      <NavbarContent className="hidden md:flex gap-10" justify="end">
-        <NavbarItem><a href="#beneficios" className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:opacity-70`}>Beneficios</a></NavbarItem>
-        <NavbarItem><a href="#como-funciona" className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:opacity-70`}>Cómo funciona</a></NavbarItem>
-        <NavbarItem><a href="#recomendaciones" className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:opacity-70`}>Recomendaciones</a></NavbarItem>
-        <NavbarItem><a href="#faq" className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:opacity-70`}>FAQ</a></NavbarItem>
-      </NavbarContent>
-    </Navbar>
+    <>
+      <Navbar isBordered={scrolled} className={`fixed z-50 transition-all duration-300 ${scrolled ? 'bg-gray-100/95 backdrop-blur-sm' : 'bg-transparent'}`}>
+        <NavbarBrand>
+          <div className={`text-3xl font-bold ${scrolled ? 'text-black' : 'text-white'}`}>Pipod</div>
+        </NavbarBrand>
+        <NavbarContent className="hidden md:flex gap-10" justify="end">
+          {navLinks.map((link) => (
+            <NavbarItem key={link.href}>
+              <a href={link.href} className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:opacity-70 ${activeSection === link.href.slice(1) ? 'opacity-100 font-bold' : ''}`}>
+                {link.label}
+              </a>
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+        <NavbarContent className="md:hidden" justify="end">
+          <button onClick={() => setMobileOpen(true)} className={`p-2 ${scrolled ? 'text-black' : 'text-white'}`}>
+            <Menu size={24} />
+          </button>
+        </NavbarContent>
+      </Navbar>
+
+      <Drawer isOpen={mobileOpen} onOpenChange={setMobileOpen} placement="right">
+        <DrawerContent>
+          <DrawerHeader className="flex justify-between items-center">
+            <span className="text-2xl font-bold">Menú</span>
+            <button onClick={() => setMobileOpen(false)}>
+              <X size={24} />
+            </button>
+          </DrawerHeader>
+          <DrawerBody>
+            <div className="space-y-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className={`block text-lg font-medium py-2 px-4 rounded-lg transition-colors ${
+                    activeSection === link.href.slice(1)
+                      ? 'bg-blue-500 text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 }
 
 function Hero() {
+  // SEO: Estructura semántica con h1 principal
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   const handleMouseMove = (e) => {
@@ -79,8 +147,8 @@ function Hero() {
     <section className="relative min-h-screen flex items-center px-6 overflow-hidden pt-20" style={{ backgroundColor: '#000000' }} onMouseMove={handleMouseMove}>
       <div className="max-w-7xl mx-auto w-full">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-12">
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }}>
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}>
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }} role="status" aria-label="Plan Retoma 2025">
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }} aria-hidden="true">
               <Sparkles size={16} style={{ color: '#06B6D4' }} />
             </motion.div>
             <span className="text-xs font-semibold tracking-wider" style={{ color: '#FFFFFF' }}>PLAN RETOMA 2025</span>
@@ -89,12 +157,12 @@ function Hero() {
           <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#D1D5DB' }} animate={{ y: mousePosition.y * 0.3 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 sm:gap-5 pt-6">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
+              <Button className="text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }} aria-label="Agendar cita para Plan Retoma">
                 Agendar cita
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF', backgroundColor: 'transparent' }}>
+              <Button className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF', backgroundColor: 'transparent' }} aria-label="Ver proceso del Plan Retoma">
                 Ver proceso
               </Button>
             </motion.div>
@@ -128,7 +196,7 @@ function Benefits() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-8">
             <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>APROVECHA TU EQUIPO USADO</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Beneficios</h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }} id="beneficios-heading">Beneficios</h2>
             <p className="text-lg leading-relaxed" style={{ color: '#9CA3AF' }}>El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-12">
@@ -181,7 +249,7 @@ function Steps() {
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-32 space-y-6">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>PROCESO</span>
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }}>Tres pasos: Un nuevo equipo</h2>
+          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }} id="steps-heading">Tres pasos: Un nuevo equipo</h2>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {STEPS.map((step, idx) => {
@@ -212,7 +280,7 @@ function Checklist() {
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-32 space-y-6">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>RECOMENDACIONES</span>
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Antes de entregar tu equipo</h2>
+          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }} id="checklist-heading">Antes de entregar tu equipo</h2>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {CHECKLIST.map((item, idx) => (
@@ -254,7 +322,7 @@ function FAQ() {
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
           <span className="text-[10px] uppercase font-bold tracking-[0.3em] mb-4 block" style={{ color: '#9CA3AF' }}>Dudas</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4" style={{ color: '#1F2937' }}>Preguntas Frecuentes</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4" style={{ color: '#1F2937' }} id="faq-heading">Preguntas Frecuentes</h2>
           <p className="text-base uppercase tracking-[0.2em]" style={{ color: '#6E6E6E' }}>Todo sobre el Plan Retoma</p>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-8">
@@ -271,10 +339,10 @@ function FooterCTA() {
     <section id="contacto" className="relative py-32 px-6 text-center overflow-hidden" style={{ backgroundColor: '#1B1B1B' }}>
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6" style={{ color: '#FFFFFF' }}>¿Listo para renovar tu equipo Apple?</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6" style={{ color: '#FFFFFF' }} id="cta-heading">¿Listo para renovar tu equipo Apple?</h2>
           <p className="text-base sm:text-lg md:text-2xl mb-8 sm:mb-12" style={{ color: '#9CA3AF' }}>Agenda tu cita y obtén el mejor valor por tu dispositivo usado</p>
           <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
-            <Button className="text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#3B82F6' }}>
+            <Button className="text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#3B82F6' }} aria-label="Agendar cita de retoma de dispositivo">
               Agendar Cita de Retoma
             </Button>
           </motion.div>
@@ -359,6 +427,14 @@ function Footer() {
 }
 
 export default function App() {
+  useSEO({
+    title: 'Pipod - Plan Retoma de Dispositivos Apple',
+    description: 'Entrega tu dispositivo Apple usado (iPhone, MacBook, iMac, Apple Watch) y recibe crédito para comprar equipo nuevo o reacondicionado. Proceso transparente, sostenible y flexible.',
+    keywords: 'retoma, iPhone, MacBook, Apple, dispositivos usados, crédito, descuento, Bogotá, Plan Retoma',
+    ogImage: 'https://pipod.co/og-image.jpg',
+    ogUrl: 'https://pipod.co'
+  });
+
   return (
     <motion.div className="font-poppins antialiased" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <NavbarComponent />
