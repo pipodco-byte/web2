@@ -12,7 +12,7 @@ export function Products() {
                 className="text-4xl md:text-5xl font-bold tracking-wide shimmer-word"
                 style={{ 
                   '--delay': `${i * 0.4}s`,
-                  '--duration': `${PRODUCTS.length * 0.4}s`
+                  '--duration': `${PRODUCTS.length * 0.4 + 2}s`
                 }}
               >
                 {product.label}

@@ -21,3 +21,40 @@
   animation-delay: var(--delay);
   color: #1D1D1F;
 }
+
+@keyframes icon0 {
+  0%, 75%, 100% { color: #000000; }
+  25%, 50% { color: #0066CC; }
+}
+
+@keyframes icon1 {
+  0%, 100% { color: #000000; }
+  25%, 50% { color: #0066CC; }
+  75% { color: #000000; }
+}
+
+@keyframes icon2 {
+  0%, 50%, 100% { color: #000000; }
+  25%, 75% { color: #0066CC; }
+}
+
+@keyframes icon3 {
+  0%, 50%, 100% { color: #000000; }
+  75% { color: #0066CC; }
+}
+
+.shimmer-icon[data-icon-index="0"] .icon-shimmer {
+  animation: icon0 1.6s ease-in-out infinite;
+}
+
+.shimmer-icon[data-icon-index="1"] .icon-shimmer {
+  animation: icon1 1.6s ease-in-out infinite;
+}
+
+.shimmer-icon[data-icon-index="2"] .icon-shimmer {
+  animation: icon2 1.6s ease-in-out infinite;
+}
+
+.shimmer-icon[data-icon-index="3"] .icon-shimmer {
+  animation: icon3 1.6s ease-in-out infinite;
+}
