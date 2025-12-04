@@ -5,6 +5,22 @@
 @layer base {
   body {
     @apply font-inter;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  iframe {
+    @apply w-full h-auto;
   }
 }
 
@@ -28,5 +44,17 @@
 @layer base {
   * {
     @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .video-container {
+    @apply w-full h-screen;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .video-container iframe {
+    @apply w-full h-full;
   }
 }
