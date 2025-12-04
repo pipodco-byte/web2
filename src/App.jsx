@@ -69,13 +69,13 @@ function Hero() {
             <Sparkles size={16} style={{ color: '#06B6D4' }} />
             <span className="text-xs font-semibold tracking-wider" style={{ color: '#FFFFFF' }}>PLAN RETOMA 2025</span>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-7xl md:text-8xl font-black leading-tight" style={{ color: '#FFFFFF' }}>Renueva tu<br/>equipo</motion.h1>
-          <motion.p variants={fadeInUp} className="text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#D1D5DB' }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
-          <motion.div variants={fadeInUp} className="flex gap-5 pt-6">
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="text-white px-10 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
+          <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight" style={{ color: '#FFFFFF' }}>Renueva tu<br/>equipo</motion.h1>
+          <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#D1D5DB' }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 sm:gap-5 pt-6">
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
               Agendar cita
             </motion.button>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-10 py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF' }}>Ver proceso</motion.button>
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF' }}>Ver proceso</motion.button>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 md:gap-16 pt-16 md:pt-20 pb-12 px-4 md:px-6" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
             {[{ label: 'iPhone' }, { label: 'MacBook' }, { label: 'iMac' }, { label: 'iPad' }, { label: 'Apple Watch' }].map((stat, i) => (
@@ -106,10 +106,10 @@ function Benefits() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
             <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>APROVECHA TU EQUIPO USADO</span>
-            <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Beneficios</h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Beneficios</h2>
             <p className="text-lg leading-relaxed" style={{ color: '#9CA3AF' }}>El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
           </motion.div>
-          <div className="grid grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-12">
             <div className="space-y-12">
               {BENEFITS.slice(0, 2).map((item, idx) => {
                 const IconComponent = item.icon;
@@ -153,7 +153,7 @@ function Steps() {
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>PROCESO</span>
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }}>Tres pasos: Un nuevo equipo</h2>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {STEPS.map((step, idx) => {
             return (
               <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10 }} className="relative text-center group cursor-pointer">
@@ -180,7 +180,7 @@ function Checklist() {
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>RECOMENDACIONES</span>
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Antes de entregar tu equipo</h2>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {CHECKLIST.map((item, idx) => (
             <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.5 }} whileHover={{ scale: 1.05 }} className="group p-8 rounded-2xl flex items-center gap-5 cursor-pointer" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(6,182,212,0.2)' }}>
@@ -221,7 +221,7 @@ function FAQ() {
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
           <span className="text-[10px] uppercase font-bold tracking-[0.3em] mb-4 block" style={{ color: '#9CA3AF' }}>Dudas</span>
-          <h2 className="text-6xl md:text-7xl font-black mb-4" style={{ color: '#1F2937' }}>Preguntas Frecuentes</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4" style={{ color: '#1F2937' }}>Preguntas Frecuentes</h2>
           <p className="text-base uppercase tracking-[0.2em]" style={{ color: '#6E6E6E' }}>Todo sobre el Plan Retoma</p>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-8">
@@ -246,8 +246,8 @@ function FooterCTA() {
     <section id="contacto" className="relative py-32 px-6 text-center overflow-hidden" style={{ backgroundColor: '#1B1B1B' }}>
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <h2 className="text-6xl font-bold mb-6" style={{ color: '#FFFFFF' }}>¿Listo para renovar tu equipo Apple?</h2>
-          <p className="text-2xl mb-12" style={{ color: '#9CA3AF' }}>Agenda tu cita y obtén el mejor valor por tu dispositivo usado</p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6" style={{ color: '#FFFFFF' }}>¿Listo para renovar tu equipo Apple?</h2>
+          <p className="text-base sm:text-lg md:text-2xl mb-8 sm:mb-12" style={{ color: '#9CA3AF' }}>Agenda tu cita y obtén el mejor valor por tu dispositivo usado</p>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
             Agendar Cita de Retoma
           </motion.button>
