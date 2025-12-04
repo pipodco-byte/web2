@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin, Menu, X } from 'lucide-react';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Image } from '@heroui/react';
 import { useSEO } from './hooks/useSEO';
+import { FooterCTA } from './components/FooterCTA';
 
 const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 const staggerContainer = { visible: { transition: { staggerChildren: 0.15 } } };
@@ -80,19 +81,19 @@ function NavbarComponent() {
     <>
       <Navbar isBordered={scrolled} className={`fixed z-50 transition-all duration-300 ${scrolled ? 'bg-gray-100/95 backdrop-blur-sm' : 'bg-transparent'}`}>
         <NavbarBrand>
-          <div className={`text-3xl font-bold ${scrolled ? 'text-black' : 'text-white'}`}>Pipod</div>
+          <div className={`text-3xl font-bold ${scrolled ? 'text-black' : 'text-black'}`}>Pipod</div>
         </NavbarBrand>
         <NavbarContent className="hidden md:flex gap-10" justify="end">
           {navLinks.map((link) => (
             <NavbarItem key={link.href}>
-              <a href={link.href} className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:opacity-70 ${activeSection === link.href.slice(1) ? 'opacity-100 font-bold' : ''}`}>
+              <a href={link.href} className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-gray-700'} hover:opacity-70 ${activeSection === link.href.slice(1) ? 'opacity-100 font-bold' : ''}`}>
                 {link.label}
               </a>
             </NavbarItem>
           ))}
         </NavbarContent>
         <NavbarContent className="md:hidden" justify="end">
-          <button onClick={() => setMobileOpen(true)} className={`p-2 ${scrolled ? 'text-black' : 'text-white'}`}>
+          <button onClick={() => setMobileOpen(true)} className={`p-2 ${scrolled ? 'text-black' : 'text-black'}`}>
             <Menu size={24} />
           </button>
         </NavbarContent>
@@ -144,30 +145,30 @@ function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center px-6 overflow-hidden pt-20" style={{ backgroundColor: '#000000' }} onMouseMove={handleMouseMove}>
+    <section className="relative min-h-screen flex items-center px-6 overflow-hidden pt-20" style={{ background: 'linear-gradient(135deg, #F5F5F7 0%, #FFFFFF 100%)' }} onMouseMove={handleMouseMove}>
       <div className="max-w-7xl mx-auto w-full">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-12">
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }} role="status" aria-label="Plan Retoma 2025">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-16">
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }} role="status" aria-label="Plan Retoma 2025">
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }} aria-hidden="true">
               <Sparkles size={16} style={{ color: '#06B6D4' }} />
             </motion.div>
-            <span className="text-xs font-semibold tracking-wider" style={{ color: '#FFFFFF' }}>PLAN RETOMA 2025</span>
+            <span className="text-xs font-semibold tracking-wider" style={{ color: '#1D1D1F' }}>PLAN RETOMA 2025</span>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight" style={{ color: '#FFFFFF' }} animate={{ y: mousePosition.y * 0.5 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>Renueva tu<br/>equipo</motion.h1>
-          <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#D1D5DB' }} animate={{ y: mousePosition.y * 0.3 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 sm:gap-5 pt-6">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }} aria-label="Agendar cita para Plan Retoma">
-                Agendar cita
+          <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight" style={{ color: '#1D1D1F' }} animate={{ y: mousePosition.y * 0.5 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>Renueva tu<br/>equipo</motion.h1>
+          <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#4B5563' }} animate={{ y: mousePosition.y * 0.3 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-8">
+            <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+              <Button className="text-white px-8 sm:px-14 py-4 sm:py-5 text-lg font-bold rounded-full shadow-2xl hover:shadow-3xl transition-all" style={{ backgroundColor: '#0066CC' }} aria-label="Agendar cita para Plan Retoma">
+                Agendar Cita
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF', backgroundColor: 'transparent' }} aria-label="Ver proceso del Plan Retoma">
+              <Button className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold border-2 hover:bg-gray-100 transition-all" style={{ borderColor: '#0066CC', color: '#0066CC', backgroundColor: 'transparent' }} aria-label="Ver proceso del Plan Retoma">
                 Ver proceso
               </Button>
             </motion.div>
           </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 md:gap-16 pt-16 md:pt-20 pb-12 px-4 md:px-6" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-16 pt-16 pb-8 px-4 md:px-8" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
             {[{ label: 'iPhone', img: 'https://images.unsplash.com/photo-1592286927505-1def25115558?w=200&h=200&fit=crop' }, { label: 'MacBook', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&h=200&fit=crop' }, { label: 'iMac', img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop' }, { label: 'iPad', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop' }, { label: 'Apple Watch', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop' }].map((stat, i) => (
               <motion.div 
                 key={i} 
@@ -186,7 +187,7 @@ function Hero() {
                   isZoomed
                   loading="lazy"
                 />
-                <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#FFFFFF' }}>
+                <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#1D1D1F' }}>
                   {stat.label}
                 </div>
               </motion.div>
@@ -254,9 +255,9 @@ function Benefits() {
 
 function Steps() {
   return (
-    <section id="como-funciona" className="py-40 px-6" style={{ backgroundColor: '#FFFFFF' }}>
+    <section id="como-funciona" className="py-32 px-8" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-32 space-y-6">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>PROCESO</span>
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }} id="steps-heading">Tres pasos: Un nuevo equipo</h2>
         </motion.div>
@@ -285,13 +286,13 @@ function Steps() {
 
 function Checklist() {
   return (
-    <section id="recomendaciones" className="py-32 px-6" style={{ backgroundColor: '#1B1B1B' }}>
+    <section id="recomendaciones" className="py-32 px-8" style={{ backgroundColor: '#1B1B1B' }}>
       <div className="max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-32 space-y-6">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>RECOMENDACIONES</span>
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }} id="checklist-heading">Antes de entregar tu equipo</h2>
         </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {CHECKLIST.map((item, idx) => (
             <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.08, x: 5 }}>
               <Card className="group p-8 rounded-2xl cursor-pointer hover:shadow-lg transition-shadow" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
@@ -343,23 +344,7 @@ function FAQ() {
   );
 }
 
-function FooterCTA() {
-  return (
-    <section id="contacto" className="relative py-32 px-6 text-center overflow-hidden" style={{ backgroundColor: '#1B1B1B' }}>
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6" style={{ color: '#FFFFFF' }} id="cta-heading">¿Listo para renovar tu equipo Apple?</h2>
-          <p className="text-base sm:text-lg md:text-2xl mb-8 sm:mb-12" style={{ color: '#9CA3AF' }}>Agenda tu cita y obtén el mejor valor por tu dispositivo usado</p>
-          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
-            <Button className="text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#3B82F6' }} aria-label="Agendar cita de retoma de dispositivo">
-              Agendar Cita de Retoma
-            </Button>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+
 
 function Newsletter() {
   const [status, setStatus] = useState('idle');

@@ -22,7 +22,7 @@ module.exports = {
           'blue-primary': '#0066CC',
           'blue-secondary': '#3B82F6',
           cyan: '#06B6D4',
-          'mint-green': '#86EFAC'
+          'whatsapp-green': '#25D366'
         }
       },
       fontFamily: {
