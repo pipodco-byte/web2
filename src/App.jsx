@@ -77,11 +77,10 @@ function Hero() {
             </motion.button>
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-10 py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF' }}>Ver proceso</motion.button>
           </motion.div>
-          <div className="grid grid-cols-3 gap-8 pt-12" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-            {[{ label: 'iPhone', sub: 'MacBook' }, { label: 'iMac', sub: 'Watch' }, { label: '90', sub: 'Días válido' }].map((stat, i) => (
-              <motion.div key={i} whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                <div className="text-5xl font-black mb-2" style={{ color: '#FFFFFF' }}>{stat.label}</div>
-                <div className="text-xs uppercase tracking-widest" style={{ color: '#9CA3AF' }}>{stat.sub}</div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 pt-12 md:pt-16 pb-8" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            {[{ label: 'iPhone' }, { label: 'MacBook' }, { label: 'iMac' }, { label: 'iPad' }, { label: 'Apple Watch' }].map((stat, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1, duration: 0.6 }} whileHover={{ scale: 1.1 }} className="cursor-pointer px-2 md:px-4 py-6 md:py-8">
+                <div className="text-5xl md:text-6xl font-black mb-3 md:mb-4" style={{ color: '#FFFFFF' }}>{stat.label}</div>
               </motion.div>
             ))}
           </div>
