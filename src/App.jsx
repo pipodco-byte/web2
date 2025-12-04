@@ -93,25 +93,25 @@ function Hero() {
 
 function Benefits() {
   return (
-    <section id="beneficios" className="py-40 px-6 bg-gray-900">
+    <section id="beneficios" className="py-40 px-6" style={{ backgroundColor: '#121212' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
-            <span className="text-[10px] uppercase font-black tracking-[0.4em] text-gray-400">APROVECHA TU EQUIPO USADO</span>
-            <h2 className="text-6xl md:text-7xl font-black tracking-tight text-white">Beneficios</h2>
-            <p className="text-lg leading-relaxed text-gray-300">El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
+            <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>APROVECHA TU EQUIPO USADO</span>
+            <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Beneficios</h2>
+            <p className="text-lg leading-relaxed" style={{ color: '#9CA3AF' }}>El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
           </motion.div>
           <div className="grid grid-cols-2 gap-12">
             <div className="space-y-12">
               {BENEFITS.slice(0, 2).map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl border border-white/10 bg-white/5 hover:border-cyan-500/30 cursor-pointer flex flex-col items-center text-center">
-                    <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
-                      <IconComponent size={32} className={`text-white transition-colors ${item.hoverColor}`} />
+                  <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl cursor-pointer flex flex-col items-center text-center" style={{ backgroundColor: '#FFFFFF' }}>
+                    <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
+                      <IconComponent size={32} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                     </motion.div>
-                    <h3 className="text-xl font-black text-white mb-3">{item.title}</h3>
-                    <p className="text-sm leading-relaxed text-gray-400">{item.desc}</p>
+                    <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
                   </motion.div>
                 );
               })}
@@ -120,12 +120,12 @@ function Benefits() {
               {BENEFITS.slice(2, 4).map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <motion.div key={idx + 2} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx + 2) * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl border border-white/10 bg-white/5 hover:border-cyan-500/30 cursor-pointer flex flex-col items-center text-center">
-                    <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
-                      <IconComponent size={32} className={`text-white transition-colors ${item.hoverColor}`} />
+                  <motion.div key={idx + 2} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx + 2) * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl cursor-pointer flex flex-col items-center text-center" style={{ backgroundColor: '#FFFFFF' }}>
+                    <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
+                      <IconComponent size={32} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                     </motion.div>
-                    <h3 className="text-xl font-black text-white mb-3">{item.title}</h3>
-                    <p className="text-sm leading-relaxed text-gray-400">{item.desc}</p>
+                    <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
                   </motion.div>
                 );
               })}
