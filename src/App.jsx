@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin, Menu, X } from 'lucide-react';
+import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin, Menu, X, HardDrive, Lock, Smartphone, Zap, FileText, HelpCircle } from 'lucide-react';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Image } from '@heroui/react';
 import { useSEO } from './hooks/useSEO';
 import { FooterCTA } from './components/FooterCTA';
@@ -25,12 +25,12 @@ const STEPS = [
 ];
 
 const CHECKLIST = [
-  { title: 'Respalda tu información', desc: 'Realizar un respaldo (backup) y, si lo prefieres, restablecerlo de fábrica.' },
-  { title: 'Desvincula tu cuenta Apple', desc: 'Desactivar "Buscar mi iPhone" y eliminar tu cuenta de iCloud.' },
-  { title: 'Cuida tus accesorios', desc: 'Retirar tarjetas SIM, fundas y accesorios personales.' },
-  { title: 'Recuerda el cargador', desc: 'Incluir el cargador si hace parte de la oferta puede aumentar el valor final.' },
-  { title: 'Documentación', desc: 'Traer factura, documento de propiedad o cajas de producto si lo tienes disponible.' },
-  { title: '¿No sabes cómo hacerlo?', desc: 'No te preocupes — nuestro equipo en tienda puede ayudarte con el respaldo, restablecimiento y desactivación de iCloud.' }
+  { title: 'Respalda tu información', desc: 'Realizar un respaldo (backup) y, si lo prefieres, restablecerlo de fábrica.', icon: HardDrive },
+  { title: 'Desvincula tu cuenta Apple', desc: 'Desactivar "Buscar mi iPhone" y eliminar tu cuenta de iCloud.', icon: Lock },
+  { title: 'Cuida tus accesorios', desc: 'Retirar tarjetas SIM, fundas y accesorios personales.', icon: Smartphone },
+  { title: 'Recuerda el cargador', desc: 'Incluir el cargador si hace parte de la oferta puede aumentar el valor final.', icon: Zap },
+  { title: 'Documentación', desc: 'Traer factura, documento de propiedad o cajas de producto si lo tienes disponible.', icon: FileText },
+  { title: '¿No sabes cómo hacerlo?', desc: 'No te preocupes — nuestro equipo en tienda puede ayudarte con el respaldo, restablecimiento y desactivación de iCloud.', icon: HelpCircle }
 ];
 
 const FAQS = [
@@ -290,7 +290,7 @@ function Checklist() {
           {CHECKLIST.map((item, idx) => (
             <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.05, x: 5 }} className="flex items-start gap-4">
               <motion.div whileHover={{ rotate: 12 }} className="flex-shrink-0 mt-1">
-                <Sparkles style={{ color: '#06B6D4' }} size={28} />
+                {item.icon && <item.icon style={{ color: '#0066CC' }} size={28} />}
               </motion.div>
               <div className="space-y-2">
                 <h3 className="text-lg font-bold" style={{ color: '#FFFFFF' }}>{item.title}</h3>
@@ -369,13 +369,13 @@ function Newsletter() {
   return (
     <div className="max-w-xl mx-auto px-6 text-center">
       <h3 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#FFFFFF' }}>Mantente Informado</h3>
-      <p className="mb-10 text-base md:text-lg leading-relaxed" style={{ color: '#000000' }}>Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#9CA3AF' }}>Sin spam, solo valor</span></p>
+      <p className="mb-10 text-base md:text-lg leading-relaxed" style={{ color: '#D1D5DB' }}>Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#9CA3AF' }}>Sin spam, solo valor</span></p>
       {status === 'success' ? (
         <div className="p-8 rounded-2xl shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '1.125rem' }}>✓ ¡Gracias! Revisa tu correo.</div>
       ) : (
         <form onSubmit={handleSubmit} className="rounded-2xl p-2 shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
           <div className="flex flex-col sm:flex-row items-stretch gap-0">
-            <Input type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1" style={{ backgroundColor: 'transparent', color: '#FFFFFF' }} required />
+            <Input type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1 text-base" style={{ backgroundColor: 'transparent', color: '#FFFFFF' }} required />
             <Button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 rounded-xl sm:rounded-l-none sm:rounded-r-xl mt-2 sm:mt-0 shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
               {status === 'loading' ? 'Enviando...' : 'Suscribirse'}
             </Button>
