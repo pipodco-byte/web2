@@ -62,26 +62,26 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center bg-black text-white px-6 overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center px-6 overflow-hidden pt-20" style={{ backgroundColor: '#000000' }}>
       <div className="max-w-7xl mx-auto w-full">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-12">
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 bg-white/10">
-            <Sparkles size={16} className="text-cyan-400" />
-            <span className="text-xs font-semibold tracking-wider">PLAN RETOMA 2025</span>
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }}>
+            <Sparkles size={16} style={{ color: '#06B6D4' }} />
+            <span className="text-xs font-semibold tracking-wider" style={{ color: '#FFFFFF' }}>PLAN RETOMA 2025</span>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-7xl md:text-8xl font-black leading-tight">Renueva tu<br/>equipo</motion.h1>
-          <motion.p variants={fadeInUp} className="text-2xl leading-relaxed font-light text-gray-300 max-w-2xl">El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
+          <motion.h1 variants={fadeInUp} className="text-7xl md:text-8xl font-black leading-tight" style={{ color: '#FFFFFF' }}>Renueva tu<br/>equipo</motion.h1>
+          <motion.p variants={fadeInUp} className="text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#D1D5DB' }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
           <motion.div variants={fadeInUp} className="flex gap-5 pt-6">
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="bg-blue-600 text-white px-10 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl">
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="text-white px-10 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
               Agendar cita
             </motion.button>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="border-2 border-white text-white px-10 py-4 rounded-full font-semibold hover:bg-white/10">Ver proceso</motion.button>
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-10 py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF' }}>Ver proceso</motion.button>
           </motion.div>
-          <div className="grid grid-cols-3 gap-8 pt-12 border-t border-white/10">
+          <div className="grid grid-cols-3 gap-8 pt-12" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
             {[{ label: 'iPhone', sub: 'MacBook' }, { label: 'iMac', sub: 'Watch' }, { label: '90', sub: 'Días válido' }].map((stat, i) => (
               <motion.div key={i} whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                <div className="text-5xl font-black mb-2 text-white">{stat.label}</div>
-                <div className="text-xs uppercase tracking-widest text-gray-500">{stat.sub}</div>
+                <div className="text-5xl font-black mb-2" style={{ color: '#FFFFFF' }}>{stat.label}</div>
+                <div className="text-xs uppercase tracking-widest" style={{ color: '#9CA3AF' }}>{stat.sub}</div>
               </motion.div>
             ))}
           </div>
@@ -139,22 +139,22 @@ function Benefits() {
 
 function Steps() {
   return (
-    <section id="como-funciona" className="py-40 px-6 bg-white">
+    <section id="como-funciona" className="py-40 px-6" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-32 space-y-6">
-          <span className="text-[10px] uppercase font-black tracking-[0.4em] text-gray-500">PROCESO</span>
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight text-black">Tres pasos: Un nuevo equipo</h2>
+          <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>PROCESO</span>
+          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }}>Tres pasos: Un nuevo equipo</h2>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-16">
           {STEPS.map((step, idx) => {
             return (
               <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10 }} className="relative text-center group cursor-pointer">
-                <motion.div whileHover={{ scale: 1.1, rotate: 6 }} className="relative z-10 w-28 h-28 rounded-3xl bg-white shadow-2xl border-4 border-gray-200 flex items-center justify-center mx-auto mb-10">
-                  <span className="text-5xl font-black text-blue-600">{step.number}</span>
+                <motion.div whileHover={{ scale: 1.1, rotate: 6 }} className="relative z-10 w-28 h-28 rounded-3xl shadow-2xl flex items-center justify-center mx-auto mb-10" style={{ backgroundColor: '#FFFFFF', border: '4px solid #E0E0E0' }}>
+                  <span className="text-5xl font-black" style={{ color: '#3B82F6' }}>{step.number}</span>
                 </motion.div>
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black text-gray-200 -z-10">{idx + 1}</div>
-                <h3 className="text-3xl font-black text-black mb-4">{step.title}</h3>
-                <p className="leading-relaxed text-gray-600">{step.desc}</p>
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#F3F4F6' }}>{idx + 1}</div>
+                <h3 className="text-3xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
+                <p className="leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
               </motion.div>
             );
           })}
@@ -166,19 +166,19 @@ function Steps() {
 
 function Checklist() {
   return (
-    <section id="recomendaciones" className="py-32 px-6 bg-gray-900">
+    <section id="recomendaciones" className="py-32 px-6" style={{ backgroundColor: '#1B1B1B' }}>
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-32 space-y-6">
-          <span className="text-[10px] uppercase font-black tracking-[0.4em] text-gray-400">RECOMENDACIONES</span>
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight text-white">Antes de entregar tu equipo</h2>
+          <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>RECOMENDACIONES</span>
+          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Antes de entregar tu equipo</h2>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-8">
           {CHECKLIST.map((item, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.5 }} whileHover={{ scale: 1.05 }} className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/30 flex items-center gap-5 cursor-pointer">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                <CheckCircle className="text-cyan-400" size={24} />
+            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.5 }} whileHover={{ scale: 1.05 }} className="group p-8 rounded-2xl flex items-center gap-5 cursor-pointer" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(6,182,212,0.2)' }}>
+                <CheckCircle style={{ color: '#06B6D4' }} size={24} />
               </div>
-              <span className="text-lg text-white font-semibold">{item}</span>
+              <span className="text-lg font-semibold" style={{ color: '#D1D5DB' }}>{item}</span>
             </motion.div>
           ))}
         </div>
@@ -193,15 +193,15 @@ function FAQ() {
   const rightFAQs = FAQS.slice(6, 12);
 
   const FAQItem = ({ faq, idx, isRight }) => (
-    <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.5 }} whileHover={{ scale: 1.01 }} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl border border-gray-200 hover:border-blue-300 overflow-hidden">
-      <motion.button onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)} className="w-full px-8 py-6 flex justify-between items-center text-left group-hover:bg-blue-50">
-        <span className="font-semibold text-lg text-black">{faq.q}</span>
+    <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.5 }} whileHover={{ scale: 1.01 }} className="group rounded-2xl shadow-lg hover:shadow-xl overflow-hidden" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E0E0E0' }}>
+      <motion.button onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)} className="w-full px-8 py-6 flex justify-between items-center text-left" style={{ backgroundColor: '#FFFFFF' }}>
+        <span className="font-semibold text-lg" style={{ color: '#1F2937' }}>{faq.q}</span>
         <motion.div animate={{ rotate: openIndex === idx ? 180 : 0 }} transition={{ duration: 0.3 }}>
-          <CheckCircle size={24} className="text-blue-600" />
+          <CheckCircle size={24} style={{ color: '#3B82F6' }} />
         </motion.div>
       </motion.button>
       {openIndex === idx && (
-        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-8 pb-6 text-gray-600 leading-relaxed bg-blue-50">
+        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-8 pb-6 leading-relaxed" style={{ backgroundColor: '#F3F4F6', color: '#4B5563' }}>
           {faq.a}
         </motion.div>
       )}
@@ -209,12 +209,12 @@ function FAQ() {
   );
 
   return (
-    <section id="faq" className="py-32 px-6 bg-white">
+    <section id="faq" className="py-32 px-6" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
-          <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-gray-500 mb-4 block">Dudas</span>
-          <h2 className="text-5xl font-bold text-black mb-4">Preguntas Frecuentes</h2>
-          <p className="text-sm uppercase tracking-[0.2em] text-gray-600">Todo sobre el Plan Retoma</p>
+          <span className="text-[10px] uppercase font-bold tracking-[0.3em] mb-4 block" style={{ color: '#9CA3AF' }}>Dudas</span>
+          <h2 className="text-5xl font-bold mb-4" style={{ color: '#1F2937' }}>Preguntas Frecuentes</h2>
+          <p className="text-sm uppercase tracking-[0.2em]" style={{ color: '#6E6E6E' }}>Todo sobre el Plan Retoma</p>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4">
@@ -235,12 +235,12 @@ function FAQ() {
 
 function FooterCTA() {
   return (
-    <section id="contacto" className="relative py-32 px-6 text-center text-white overflow-hidden bg-gray-900">
+    <section id="contacto" className="relative py-32 px-6 text-center overflow-hidden" style={{ backgroundColor: '#1B1B1B' }}>
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <h2 className="text-6xl font-bold mb-6">¿Listo para renovar tu equipo Apple?</h2>
-          <p className="text-2xl mb-12 text-gray-300">Agenda tu cita y obtén el mejor valor por tu dispositivo usado</p>
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="bg-blue-600 text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-xl">
+          <h2 className="text-6xl font-bold mb-6" style={{ color: '#FFFFFF' }}>¿Listo para renovar tu equipo Apple?</h2>
+          <p className="text-2xl mb-12" style={{ color: '#9CA3AF' }}>Agenda tu cita y obtén el mejor valor por tu dispositivo usado</p>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="text-white text-lg px-16 py-5 rounded-full font-semibold shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
             Agendar Cita de Retoma
           </motion.button>
         </motion.div>
@@ -278,15 +278,15 @@ function Newsletter() {
 
   return (
     <div className="max-w-xl mx-auto px-6 text-center">
-      <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white">Mantente Informado</h3>
-      <p className="text-gray-300 mb-10 text-base md:text-lg leading-relaxed">Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em] text-gray-400">Sin spam, solo valor</span></p>
+      <h3 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#FFFFFF' }}>Mantente Informado</h3>
+      <p className="mb-10 text-base md:text-lg leading-relaxed" style={{ color: '#D1D5DB' }}>Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#9CA3AF' }}>Sin spam, solo valor</span></p>
       {status === 'success' ? (
-        <div className="bg-white/10 backdrop-blur-md p-8 border border-white/20 text-white text-lg rounded-2xl shadow-2xl">✓ ¡Gracias! Revisa tu correo.</div>
+        <div className="p-8 rounded-2xl shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '1.125rem' }}>✓ ¡Gracias! Revisa tu correo.</div>
       ) : (
-        <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2 shadow-2xl">
+        <form onSubmit={handleSubmit} className="rounded-2xl p-2 shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
           <div className="flex flex-col sm:flex-row items-stretch gap-0">
-            <input type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1 px-6 py-4 bg-transparent text-white placeholder-gray-400 outline-none rounded-xl" required />
-            <button type="submit" disabled={status === 'loading'} className="bg-blue-600 text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-blue-700 transition-all disabled:opacity-70 rounded-xl sm:rounded-l-none sm:rounded-r-xl mt-2 sm:mt-0 shadow-lg hover:shadow-xl">
+            <input type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1 px-6 py-4 outline-none rounded-xl" style={{ backgroundColor: 'transparent', color: '#FFFFFF' }} required />
+            <button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 rounded-xl sm:rounded-l-none sm:rounded-r-xl mt-2 sm:mt-0 shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
               {status === 'loading' ? 'Enviando...' : 'Suscribirse'}
             </button>
           </div>
@@ -299,23 +299,23 @@ function Newsletter() {
 
 function Footer() {
   return (
-    <footer className="bg-black text-white">
-      <div className="py-32 border-b border-gray-800">
+    <footer style={{ backgroundColor: '#000000' }}>
+      <div className="py-32" style={{ borderBottom: '1px solid #1B1B1B' }}>
         <Newsletter />
       </div>
       <div className="max-w-7xl mx-auto py-16 px-6">
         <div className="flex justify-center space-x-8 mb-12">
-          <Facebook className="cursor-pointer hover:text-blue-400 transition-all hover:scale-125" size={28} />
-          <Instagram className="cursor-pointer hover:text-pink-400 transition-all hover:scale-125" size={28} />
-          <Twitter className="cursor-pointer hover:text-blue-300 transition-all hover:scale-125" size={28} />
-          <Linkedin className="cursor-pointer hover:text-blue-500 transition-all hover:scale-125" size={28} />
+          <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
+          <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
+          <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
+          <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
         </div>
-        <div className="text-center text-gray-400">
+        <div className="text-center" style={{ color: '#6E6E6E' }}>
           <p className="text-lg mb-6">© 2025 Pipod. Todos los derechos reservados.</p>
           <div className="space-x-8 text-sm uppercase tracking-[0.15em]">
-            <a href="#" className="hover:text-white transition-colors">Privacidad</a>
-            <a href="#" className="hover:text-white transition-colors">Términos</a>
-            <a href="#" className="hover:text-white transition-colors">Contacto</a>
+            <a href="#" className="transition-colors" style={{ color: '#6E6E6E' }}>Privacidad</a>
+            <a href="#" className="transition-colors" style={{ color: '#6E6E6E' }}>Términos</a>
+            <a href="#" className="transition-colors" style={{ color: '#6E6E6E' }}>Contacto</a>
           </div>
         </div>
       </div>
