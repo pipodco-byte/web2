@@ -77,7 +77,7 @@ function Hero() {
             </motion.button>
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-10 py-4 rounded-full font-semibold" style={{ border: '2px solid #FFFFFF', color: '#FFFFFF' }}>Ver proceso</motion.button>
           </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12 pt-16 md:pt-20 pb-12 px-4 md:px-6" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 md:gap-16 pt-16 md:pt-20 pb-12 px-4 md:px-6" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
             {[{ label: 'iPhone' }, { label: 'MacBook' }, { label: 'iMac' }, { label: 'iPad' }, { label: 'Apple Watch' }].map((stat, i) => (
               <motion.div 
                 key={i} 
@@ -85,7 +85,7 @@ function Hero() {
                 whileInView={{ opacity: 1, x: 0 }} 
                 transition={{ delay: i * 0.1, duration: 0.6 }} 
                 whileHover={{ scale: 1.05, color: '#86EFAC' }}
-                className="cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300"
+                className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}
               >
                 <div className="text-4xl md:text-5xl font-bold tracking-wide mb-4 md:mb-6" style={{ color: '#FFFFFF' }}>
                   {stat.label}
@@ -103,7 +103,7 @@ function Benefits() {
   return (
     <section id="beneficios" className="py-40 px-6" style={{ backgroundColor: '#121212' }}>
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
             <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>APROVECHA TU EQUIPO USADO</span>
             <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }}>Beneficios</h2>
@@ -116,24 +116,24 @@ function Benefits() {
                 return (
                   <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl cursor-pointer flex flex-col items-center text-center" style={{ backgroundColor: '#FFFFFF' }}>
                     <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
-                      <IconComponent size={32} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
+                      <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                     </motion.div>
                     <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: '#374151' }}>{item.desc}</p>
                   </motion.div>
                 );
               })}
             </div>
-            <div className="space-y-12 pt-12">
+            <div className="space-y-12 pt-0">
               {BENEFITS.slice(2, 4).map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
                   <motion.div key={idx + 2} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx + 2) * 0.1, duration: 0.6 }} whileHover={{ y: -10, scale: 1.02 }} className="group p-8 rounded-3xl cursor-pointer flex flex-col items-center text-center" style={{ backgroundColor: '#FFFFFF' }}>
                     <motion.div whileHover={{ rotate: 12, scale: 1.1 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
-                      <IconComponent size={32} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
+                      <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                     </motion.div>
                     <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: '#374151' }}>{item.desc}</p>
                   </motion.div>
                 );
               })}
