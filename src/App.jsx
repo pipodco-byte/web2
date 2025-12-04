@@ -57,14 +57,14 @@ function NavbarComponent() {
         <NavbarContent className="hidden md:flex gap-10" justify="end">
           {navLinks.map((link) => (
             <NavbarItem key={link.href}>
-              <a href={link.href} className={`text-sm font-medium ${scrolled ? 'text-gray-700' : 'text-gray-700'} hover:opacity-70 ${activeSection === link.href.slice(1) ? 'opacity-100 font-bold' : ''}`}>
+              <a href={link.href} className={`text-sm font-medium text-gray-700 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 rounded ${activeSection === link.href.slice(1) ? 'opacity-100 font-bold' : ''}`}>
                 {link.label}
               </a>
             </NavbarItem>
           ))}
         </NavbarContent>
         <NavbarContent className="md:hidden" justify="end">
-          <button onClick={() => setMobileOpen(true)} className={`p-2 ${scrolled ? 'text-black' : 'text-black'}`}>
+          <button onClick={() => setMobileOpen(true)} className="p-2 text-black focus-visible:outline-2 focus-visible:outline-offset-2 rounded" aria-label="Abrir menú">
             <Menu size={24} />
           </button>
         </NavbarContent>
@@ -74,7 +74,7 @@ function NavbarComponent() {
         <DrawerContent>
           <DrawerHeader className="flex justify-between items-center">
             <span className="text-2xl font-bold">Menú</span>
-            <button onClick={() => setMobileOpen(false)}>
+            <button onClick={() => setMobileOpen(false)} aria-label="Cerrar menú" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
               <X size={24} />
             </button>
           </DrawerHeader>
@@ -85,7 +85,7 @@ function NavbarComponent() {
                   key={link.href}
                   href={link.href}
                   onClick={handleNavClick}
-                  className={`block text-lg font-medium py-2 px-4 rounded-lg transition-colors ${
+                  className={`block text-lg font-medium py-2 px-4 rounded-lg transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
                     activeSection === link.href.slice(1)
                       ? 'bg-blue-500 text-white'
                       : 'text-gray-700 hover:bg-gray-100'
@@ -101,8 +101,6 @@ function NavbarComponent() {
     </>
   );
 }
-
-
 
 function Products() {
   return (
@@ -137,7 +135,7 @@ function Benefits() {
                 const IconComponent = item.icon;
                 return (
                   <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15, scale: 1.05 }} className="group">
-                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#FFFFFF' }}>
+                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#FFFFFF' }}>
                       <CardBody className="flex flex-col items-center text-center">
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
@@ -155,7 +153,7 @@ function Benefits() {
                 const IconComponent = item.icon;
                 return (
                   <motion.div key={idx + 2} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx + 2) * 0.08, duration: 0.5 }} whileHover={{ y: -15, scale: 1.05 }} className="group">
-                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#FFFFFF' }}>
+                    <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#FFFFFF' }}>
                       <CardBody className="flex flex-col items-center text-center">
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
@@ -185,7 +183,7 @@ function Steps() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {STEPS.map((step, idx) => {
             return (
-              <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15 }} className="relative text-center group cursor-pointer">
+              <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15 }} className="relative text-center group cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
                 <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }} className="relative z-10 w-28 h-28 rounded-full shadow-2xl hover:shadow-3xl flex items-center justify-center mx-auto mb-10 transition-shadow" style={{ backgroundColor: '#000000', border: '4px solid #1a1a1a' }}>
                   <span className="text-5xl font-black" style={{ color: '#FFFFFF' }}>{step.number}</span>
                 </motion.div>
@@ -211,7 +209,7 @@ function Checklist() {
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {CHECKLIST.map((item, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.05, x: 5 }} className="flex items-start gap-4">
+            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.05, x: 5 }} className="flex items-start gap-4 focus-visible:outline-2 focus-visible:outline-offset-2 rounded p-2">
               <motion.div whileHover={{ rotate: 12 }} className="flex-shrink-0 mt-1">
                 <item.icon style={{ color: '#0066CC' }} size={28} />
               </motion.div>
@@ -235,7 +233,7 @@ function FAQ() {
     <div className="space-y-4">
       <Accordion>
         {faqs.map((faq, idx) => (
-          <AccordionItem key={startIdx + idx} title={faq.q} className="text-xl font-semibold" style={{ color: '#1F2937' }}>
+          <AccordionItem key={startIdx + idx} title={faq.q} className="text-xl font-semibold focus-visible:outline-2 focus-visible:outline-offset-2" style={{ color: '#1F2937' }}>
             <div className="text-lg leading-relaxed" style={{ color: '#4B5563' }}>{faq.a}</div>
           </AccordionItem>
         ))}
@@ -259,8 +257,6 @@ function FAQ() {
     </section>
   );
 }
-
-
 
 function Newsletter() {
   const [status, setStatus] = useState('idle');
@@ -300,12 +296,13 @@ function Newsletter() {
       ) : (
         <form onSubmit={handleSubmit} className="rounded-2xl p-2 shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
           <div className="flex flex-col sm:flex-row items-stretch gap-0">
-            <Input type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1 text-base" style={{ backgroundColor: 'transparent', color: '#FFFFFF' }} required />
-            <Button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 rounded-xl sm:rounded-l-none sm:rounded-r-xl mt-2 sm:mt-0 shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3B82F6' }}>
+            <label htmlFor="newsletter-email" className="sr-only">Correo electrónico</label>
+            <Input id="newsletter-email" type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={status === 'loading'} className="flex-1 text-base focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: 'transparent', color: '#FFFFFF' }} required />
+            <Button type="submit" disabled={status === 'loading'} className="text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all disabled:opacity-70 rounded-xl sm:rounded-l-none sm:rounded-r-xl mt-2 sm:mt-0 shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2" style={{ backgroundColor: '#3B82F6' }}>
               {status === 'loading' ? 'Enviando...' : 'Suscribirse'}
             </Button>
           </div>
-          {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
+          {error && <p className="text-red-400 text-sm mt-2" role="alert">{error}</p>}
         </form>
       )}
     </div>
@@ -320,17 +317,25 @@ function Footer() {
       </div>
       <div className="max-w-7xl mx-auto py-16 px-6">
         <div className="flex justify-center space-x-8 mb-12">
-          <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
-          <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
-          <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
-          <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          <a href="#" aria-label="Facebook" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
+          <a href="#" aria-label="Instagram" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
+          <a href="#" aria-label="Twitter" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
+          <a href="#" aria-label="LinkedIn" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
         </div>
         <div className="text-center" style={{ color: '#6E6E6E' }}>
           <p className="text-lg mb-6">© 2025 Pipod. Todos los derechos reservados.</p>
           <div className="space-x-8 text-sm uppercase tracking-[0.15em]">
-            <a href="#" className="transition-colors" style={{ color: '#6E6E6E' }}>Privacidad</a>
-            <a href="#" className="transition-colors" style={{ color: '#6E6E6E' }}>Términos</a>
-            <a href="#" className="transition-colors" style={{ color: '#6E6E6E' }}>Contacto</a>
+            <a href="#" className="transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 rounded" style={{ color: '#6E6E6E' }}>Privacidad</a>
+            <a href="#" className="transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 rounded" style={{ color: '#6E6E6E' }}>Términos</a>
+            <a href="#" className="transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 rounded" style={{ color: '#6E6E6E' }}>Contacto</a>
           </div>
         </div>
       </div>

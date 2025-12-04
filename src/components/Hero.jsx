@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { Button } from '@heroui/react';
+import { BUTTON_STYLES, BUTTON_COLORS } from '../styles/theme';
 
 const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 const staggerContainer = { visible: { transition: { staggerChildren: 0.15 } } };
@@ -33,12 +34,12 @@ export function Hero() {
             <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#4B5563' }} animate={{ y: mousePosition.y * 0.3 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-8">
               <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
-                <Button className="text-white px-8 sm:px-14 py-4 sm:py-5 text-lg font-bold rounded-full shadow-2xl hover:shadow-3xl transition-all" style={{ backgroundColor: '#0066CC' }} aria-label="Agendar cita para Plan Retoma">
+                <Button className={BUTTON_STYLES.primary} style={{ backgroundColor: BUTTON_COLORS.primary.bg }} aria-label="Agendar cita para Plan Retoma">
                   Agendar Cita
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold border-2 hover:bg-gray-100 transition-all" style={{ borderColor: '#0066CC', color: '#0066CC', backgroundColor: 'transparent' }} aria-label="Ver proceso del Plan Retoma">
+                <Button className={BUTTON_STYLES.secondary} style={{ borderColor: BUTTON_COLORS.secondary.border, color: BUTTON_COLORS.secondary.text }} aria-label="Ver proceso del Plan Retoma">
                   Ver proceso
                 </Button>
               </motion.div>
