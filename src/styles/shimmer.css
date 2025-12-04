@@ -1,0 +1,28 @@
+@keyframes shimmerLeft {
+  0% {
+    backgroundPosition: -200% 0;
+  }
+  100% {
+    backgroundPosition: 200% 0;
+  }
+}
+
+.shimmer-text {
+  color: #1D1D1F;
+  background: linear-gradient(90deg, #1D1D1F 0%, #0066CC 50%, #1D1D1F 100%);
+  background-size: 200% 100%;
+  background-position: -200% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerLeft 2s ease-in-out forwards;
+}
+
+.shimmer-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #1D1D1F;
+  z-index: -1;
+}

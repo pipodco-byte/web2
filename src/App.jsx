@@ -5,7 +5,9 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, Ca
 import { useSEO } from './hooks/useSEO';
 import { FooterCTA } from './components/FooterCTA';
 import { Hero } from './components/Hero';
-import { BENEFITS, STEPS, CHECKLIST, FAQS, PRODUCTS } from './data/constants';
+import { Products } from './components/Products';
+import { BENEFITS, STEPS, CHECKLIST, FAQS } from './data/constants';
+import './styles/shimmer.css';
 
 const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 const staggerContainer = { visible: { transition: { staggerChildren: 0.15 } } };
@@ -102,22 +104,6 @@ function NavbarComponent() {
   );
 }
 
-function Products() {
-  return (
-    <section className="py-16 px-8" style={{ backgroundColor: '#F5F5F7' }}>
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-16">
-          {PRODUCTS.map((product, i) => (
-            <motion.div key={i} initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08, duration: 0.5 }} whileHover={{ scale: 1.08, y: -5 }} className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}>
-              <Avatar src={product.img} alt={product.label} size="xl" className="w-20 h-20 mx-auto mb-4" isBordered color="primary" />
-              <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#1D1D1F' }}>{product.label}</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Benefits() {
   return (
