@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin, Menu, X } from 'lucide-react';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from '@heroui/react';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Image } from '@heroui/react';
 import { useSEO } from './hooks/useSEO';
 
 const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
@@ -168,16 +168,25 @@ function Hero() {
             </motion.div>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 md:gap-16 pt-16 md:pt-20 pb-12 px-4 md:px-6" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-            {[{ label: 'iPhone' }, { label: 'MacBook' }, { label: 'iMac' }, { label: 'iPad' }, { label: 'Apple Watch' }].map((stat, i) => (
+            {[{ label: 'iPhone', img: 'https://images.unsplash.com/photo-1592286927505-1def25115558?w=200&h=200&fit=crop' }, { label: 'MacBook', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&h=200&fit=crop' }, { label: 'iMac', img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop' }, { label: 'iPad', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop' }, { label: 'Apple Watch', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop' }].map((stat, i) => (
               <motion.div 
                 key={i} 
                 initial={{ opacity: 0, x: -100 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
                 transition={{ delay: i * 0.08, duration: 0.5 }} 
-                whileHover={{ scale: 1.08, color: '#86EFAC', y: -5 }}
+                whileHover={{ scale: 1.08, y: -5 }}
                 className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}
               >
-                <div className="text-4xl md:text-5xl font-bold tracking-wide mb-4 md:mb-6" style={{ color: '#FFFFFF' }}>
+                <Image
+                  src={stat.img}
+                  alt={stat.label}
+                  width={80}
+                  height={80}
+                  className="mx-auto mb-4 rounded-lg"
+                  isZoomed
+                  loading="lazy"
+                />
+                <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#FFFFFF' }}>
                   {stat.label}
                 </div>
               </motion.div>
