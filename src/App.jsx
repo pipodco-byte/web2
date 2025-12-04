@@ -168,32 +168,24 @@ function Hero() {
               </Button>
             </motion.div>
           </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-16 pt-16 pb-8 px-4 md:px-8" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-            {[{ label: 'iPhone', img: 'https://images.unsplash.com/photo-1592286927505-1def25115558?w=200&h=200&fit=crop' }, { label: 'MacBook', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&h=200&fit=crop' }, { label: 'iMac', img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop' }, { label: 'iPad', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop' }, { label: 'Apple Watch', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop' }].map((stat, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, x: -100 }} 
-                whileInView={{ opacity: 1, x: 0 }} 
-                transition={{ delay: i * 0.08, duration: 0.5 }} 
-                whileHover={{ scale: 1.08, y: -5 }}
-                className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}
-              >
-                <Image
-                  src={stat.img}
-                  alt={stat.label}
-                  width={80}
-                  height={80}
-                  className="mx-auto mb-4 rounded-lg"
-                  isZoomed
-                  loading="lazy"
-                />
-                <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#1D1D1F' }}>
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function Products() {
+  return (
+    <section className="py-16 px-8" style={{ backgroundColor: '#F5F5F7' }}>
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-16">
+          {[{ label: 'iPhone', img: 'https://images.unsplash.com/photo-1592286927505-1def25115558?w=200&h=200&fit=crop' }, { label: 'MacBook', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&h=200&fit=crop' }, { label: 'iMac', img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop' }, { label: 'iPad', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop' }, { label: 'Apple Watch', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop' }].map((stat, i) => (
+            <motion.div key={i} initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08, duration: 0.5 }} whileHover={{ scale: 1.08, y: -5 }} className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}>
+              <Image src={stat.img} alt={stat.label} width={80} height={80} className="mx-auto mb-4 rounded-lg" isZoomed loading="lazy" />
+              <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#1D1D1F' }}>{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -258,20 +250,15 @@ function Steps() {
     <section id="como-funciona" className="py-32 px-8" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
-          <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>PROCESO</span>
           <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }} id="steps-heading">Tres pasos: Un nuevo equipo</h2>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {STEPS.map((step, idx) => {
             return (
               <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15 }} className="relative text-center group cursor-pointer">
-                <Card className="relative z-10 w-28 h-28 rounded-3xl shadow-2xl hover:shadow-3xl flex items-center justify-center mx-auto mb-10 transition-shadow" style={{ backgroundColor: '#FFFFFF', border: '4px solid #E0E0E0' }}>
-                  <CardBody className="flex items-center justify-center">
-                    <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }}>
-                      <span className="text-5xl font-black" style={{ color: '#06B6D4' }}>{step.number}</span>
-                    </motion.div>
-                  </CardBody>
-                </Card>
+                <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }} className="relative z-10 w-28 h-28 rounded-full shadow-2xl hover:shadow-3xl flex items-center justify-center mx-auto mb-10 transition-shadow" style={{ backgroundColor: '#000000', border: '4px solid #1a1a1a' }}>
+                  <span className="text-5xl font-black" style={{ color: '#FFFFFF' }}>{step.number}</span>
+                </motion.div>
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }}>{idx + 1}</div>
                 <h3 className="text-4xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
                 <p className="text-lg leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
@@ -286,7 +273,7 @@ function Steps() {
 
 function Checklist() {
   return (
-    <section id="recomendaciones" className="py-32 px-8" style={{ backgroundColor: '#1B1B1B' }}>
+    <section id="recomendaciones" className="py-32 px-8" style={{ backgroundColor: '#121212' }}>
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>RECOMENDACIONES</span>
@@ -433,6 +420,7 @@ export default function App() {
     <motion.div className="font-inter antialiased" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <NavbarComponent />
       <Hero />
+      <Products />
       <Benefits />
       <Steps />
       <Checklist />
