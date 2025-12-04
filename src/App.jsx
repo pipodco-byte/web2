@@ -161,8 +161,8 @@ function Steps() {
                   <span className="text-5xl font-black" style={{ color: '#06B6D4' }}>{step.number}</span>
                 </motion.div>
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }}>{idx + 1}</div>
-                <h3 className="text-3xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
-                <p className="leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
+                <h3 className="text-4xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
+                <p className="text-lg leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
               </motion.div>
             );
           })}
@@ -186,7 +186,7 @@ function Checklist() {
               <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(6,182,212,0.2)' }}>
                 <CheckCircle style={{ color: '#06B6D4' }} size={24} />
               </div>
-              <span className="text-lg font-semibold" style={{ color: '#D1D5DB' }}>{item}</span>
+              <span className="text-xl font-semibold" style={{ color: '#D1D5DB' }}>{item}</span>
             </motion.div>
           ))}
         </div>
@@ -203,13 +203,13 @@ function FAQ() {
   const FAQItem = ({ faq, idx, isRight }) => (
     <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.5 }} whileHover={{ scale: 1.01 }} className="group rounded-2xl shadow-lg hover:shadow-xl overflow-hidden" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E0E0E0' }}>
       <motion.button onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)} className="w-full px-8 py-6 flex justify-between items-center text-left" style={{ backgroundColor: '#FFFFFF' }}>
-        <span className="font-semibold text-lg" style={{ color: '#1F2937' }}>{faq.q}</span>
+        <span className="font-semibold text-xl" style={{ color: '#1F2937' }}>{faq.q}</span>
         <motion.div animate={{ rotate: openIndex === idx ? 180 : 0 }} transition={{ duration: 0.3 }}>
           <CheckCircle size={24} style={{ color: '#3B82F6' }} />
         </motion.div>
       </motion.button>
       {openIndex === idx && (
-        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-8 pb-6 leading-relaxed" style={{ backgroundColor: '#F3F4F6', color: '#4B5563' }}>
+        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-8 pb-6 text-lg leading-relaxed" style={{ backgroundColor: '#F3F4F6', color: '#4B5563' }}>
           {faq.a}
         </motion.div>
       )}
@@ -221,8 +221,8 @@ function FAQ() {
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
           <span className="text-[10px] uppercase font-bold tracking-[0.3em] mb-4 block" style={{ color: '#9CA3AF' }}>Dudas</span>
-          <h2 className="text-5xl font-bold mb-4" style={{ color: '#1F2937' }}>Preguntas Frecuentes</h2>
-          <p className="text-sm uppercase tracking-[0.2em]" style={{ color: '#6E6E6E' }}>Todo sobre el Plan Retoma</p>
+          <h2 className="text-6xl md:text-7xl font-black mb-4" style={{ color: '#1F2937' }}>Preguntas Frecuentes</h2>
+          <p className="text-base uppercase tracking-[0.2em]" style={{ color: '#6E6E6E' }}>Todo sobre el Plan Retoma</p>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4">
