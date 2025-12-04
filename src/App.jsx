@@ -119,7 +119,7 @@ function Benefits() {
                       <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                     </motion.div>
                     <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#374151' }}>{item.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
                   </motion.div>
                 );
               })}
@@ -133,7 +133,7 @@ function Benefits() {
                       <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
                     </motion.div>
                     <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#374151' }}>{item.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
                   </motion.div>
                 );
               })}
@@ -158,9 +158,9 @@ function Steps() {
             return (
               <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1, duration: 0.6 }} whileHover={{ y: -10 }} className="relative text-center group cursor-pointer">
                 <motion.div whileHover={{ scale: 1.1, rotate: 6 }} className="relative z-10 w-28 h-28 rounded-3xl shadow-2xl flex items-center justify-center mx-auto mb-10" style={{ backgroundColor: '#FFFFFF', border: '4px solid #E0E0E0' }}>
-                  <span className="text-5xl font-black" style={{ color: '#3B82F6' }}>{step.number}</span>
+                  <span className="text-5xl font-black" style={{ color: '#06B6D4' }}>{step.number}</span>
                 </motion.div>
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#F3F4F6' }}>{idx + 1}</div>
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }}>{idx + 1}</div>
                 <h3 className="text-3xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
                 <p className="leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
               </motion.div>
