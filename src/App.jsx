@@ -126,8 +126,8 @@ function Benefits() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-8">
             <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>APROVECHA TU EQUIPO USADO</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }} id="beneficios-heading">Beneficios</h2>
-            <p className="text-lg leading-relaxed" style={{ color: '#9CA3AF' }}>El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight" style={{ letterSpacing: "-0.03em" }} style={{ color: '#F9FAFB' }} id="beneficios-heading">Beneficios</h2>
+            <p className="text-base leading-relaxed" style={{ color: '#9CA3AF' }}>El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-12">
             <div className="space-y-12">
@@ -140,8 +140,8 @@ function Benefits() {
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
                         </motion.div>
-                        <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
-                        <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
+                        <h3 className="text-xl sm:text-2xl font-bold mb-3 leading-snug" style={{ color: '#1F2937' }}>{item.title}</h3>
+                        <p className="text-base leading-relaxed" style={{ color: "#4B5563" }}>{item.desc}</p>
                       </CardBody>
                     </Card>
                   </motion.div>
@@ -158,8 +158,8 @@ function Benefits() {
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
                           <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
                         </motion.div>
-                        <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
-                        <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
+                        <h3 className="text-xl sm:text-2xl font-bold mb-3 leading-snug" style={{ color: '#1F2937' }}>{item.title}</h3>
+                        <p className="text-base leading-relaxed" style={{ color: "#4B5563" }}>{item.desc}</p>
                       </CardBody>
                     </Card>
                   </motion.div>
@@ -189,7 +189,7 @@ function Steps() {
                 </motion.div>
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }} aria-hidden="true">{idx + 1}</div>
                 <h3 className="text-4xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
-                <p className="text-lg leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
+                <p className="text-base leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
               </motion.div>
             );
           })}
@@ -234,7 +234,7 @@ function FAQ() {
       <Accordion>
         {faqs.map((faq, idx) => (
           <AccordionItem key={startIdx + idx} title={faq.q} className="text-xl font-semibold focus-visible:outline-2 focus-visible:outline-offset-2" style={{ color: '#1F2937' }}>
-            <div className="text-lg leading-relaxed" style={{ color: '#4B5563' }}>{faq.a}</div>
+            <div className="text-base leading-relaxed" style={{ color: '#4B5563' }}>{faq.a}</div>
           </AccordionItem>
         ))}
       </Accordion>
@@ -290,7 +290,7 @@ function Newsletter() {
   return (
     <div className="max-w-xl mx-auto px-6 text-center">
       <h3 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#FFFFFF' }}>Mantente Informado</h3>
-      <p className="mb-10 text-base md:text-lg leading-relaxed" style={{ color: '#D1D5DB' }}>Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#9CA3AF' }}>Sin spam, solo valor</span></p>
+      <p className="mb-10 text-base md:text-base leading-relaxed" style={{ color: '#D1D5DB' }}>Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#9CA3AF' }}>Sin spam, solo valor</span></p>
       {status === 'success' ? (
         <div className="p-8 rounded-2xl shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '1.125rem' }}>✓ ¡Gracias! Revisa tu correo.</div>
       ) : (

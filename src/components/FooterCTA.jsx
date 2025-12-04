@@ -20,10 +20,10 @@ export function FooterCTA() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-8"
           >
-            <h2 className="text-5xl md:text-6xl font-black leading-tight" style={{ color: '#FFFFFF', letterSpacing: '-0.03em' }}>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight" style={{ color: '#FFFFFF', letterSpacing: '-0.03em' }}>
               ¿Listo para renovar?
             </h2>
-            <p className="text-base md:text-lg" style={{ color: '#D1D5DB' }}>
+            <p className="text-base leading-relaxed" style={{ color: '#D1D5DB' }}>
               Agenda tu diagnóstico hoy y descubre cuánto vale tu dispositivo Apple.
             </p>
           </motion.div>
@@ -42,7 +42,7 @@ export function FooterCTA() {
               className="w-full"
             >
               <Button
-                className="w-full text-white text-lg px-12 py-6 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition-all"
+                className="w-full text-white text-base px-8 sm:px-14 py-4 rounded-2xl font-bold shadow-lg hover:shadow-2xl transition-all focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ backgroundColor: '#0066CC' }}
                 aria-label="Agendar cita de retoma"
               >
