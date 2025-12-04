@@ -12,7 +12,15 @@ export function Benefits() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-8">
             <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>APROVECHA TU EQUIPO USADO</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight shimmer-beneficios" style={{ letterSpacing: "-0.03em", color: '#F9FAFB' }} id="beneficios-heading">Beneficios</h2>
+            <motion.h2 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight shimmer-beneficios" 
+              style={{ letterSpacing: "-0.03em", color: '#F9FAFB' }} 
+              id="beneficios-heading"
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              Beneficios
+            </motion.h2>
             <p className="text-base leading-relaxed" style={{ color: '#9CA3AF' }}>El Plan Retoma de Pipod te permite renovar tu equipo con beneficios económicos y ambientales. Obtén el mejor valor por tu dispositivo usado y contribuye a un futuro más sostenible.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-12">
