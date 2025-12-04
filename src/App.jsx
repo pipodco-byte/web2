@@ -1,52 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, CheckCircle, Lightbulb, Heart, Leaf, Send, Facebook, Instagram, Twitter, Linkedin, Menu, X, HardDrive, Lock, Smartphone, Zap, FileText, HelpCircle } from 'lucide-react';
+import { Sparkles, Facebook, Instagram, Twitter, Linkedin, Menu, X } from 'lucide-react';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Image } from '@heroui/react';
 import { useSEO } from './hooks/useSEO';
 import { FooterCTA } from './components/FooterCTA';
+import { BENEFITS, STEPS, CHECKLIST, FAQS, PRODUCTS } from './data/constants';
 
 const fadeInUp = { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 const staggerContainer = { visible: { transition: { staggerChildren: 0.15 } } };
 const slideInLeft = { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } };
 const slideInRight = { hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6 } } };
-
-// SEO: Agregar atributos alt a imágenes y aria-labels a botones
-const BENEFITS = [
-  { icon: Lightbulb, title: 'Ahorro inmediato', desc: 'Tu dispositivo usado se valora y ese monto se convierte en crédito o descuento para el nuevo. Esto permite reducir el costo al momento de la compra.', hoverColor: 'group-hover:text-yellow-400' },
-  { icon: Heart, title: 'Proceso transparente', desc: 'Revisamos tu equipo, te mostramos cómo llegamos al valor. Sabes lo que estás entregando, lo que vale y lo que recibirás.', hoverColor: 'group-hover:text-red-400' },
-  { icon: Leaf, title: 'Sostenible', desc: 'Al dar tu equipo usado, se promueve su reutilización o reciclaje. Esto reduce residuos electrónicos y beneficia al medio ambiente.', hoverColor: 'group-hover:text-green-400' },
-  { icon: Send, title: 'Decisión flexible', desc: 'El crédito que obtienes puede aplicarse a productos nuevos o reacondicionados (según tus reglas). Puedes elegir qué equipo comprar.', hoverColor: 'group-hover:text-blue-400' }
-];
-
-const STEPS = [
-  { number: '1', title: 'Diagnóstico', desc: 'Trae tu equipo a nuestra tienda y solicita un diagnóstico. También podemos programar una recogida.' },
-  { number: '2', title: 'Evaluación', desc: 'Revisamos tu equipo: IMEI, batería, pantalla, puertos, sensores de humedad y funcionamiento general.' },
-  { number: '3', title: 'Equipo Nuevo', desc: 'Aplicamos el crédito a la compra de un nuevo o reacondicionado. Te entregamos comprobante.' }
-];
-
-const CHECKLIST = [
-  { title: 'Respalda tu información', desc: 'Realizar un respaldo (backup) y, si lo prefieres, restablecerlo de fábrica.', icon: HardDrive },
-  { title: 'Desvincula tu cuenta Apple', desc: 'Desactivar "Buscar mi iPhone" y eliminar tu cuenta de iCloud.', icon: Lock },
-  { title: 'Cuida tus accesorios', desc: 'Retirar tarjetas SIM, fundas y accesorios personales.', icon: Smartphone },
-  { title: 'Recuerda el cargador', desc: 'Incluir el cargador si hace parte de la oferta puede aumentar el valor final.', icon: Zap },
-  { title: 'Documentación', desc: 'Traer factura, documento de propiedad o cajas de producto si lo tienes disponible.', icon: FileText },
-  { title: '¿No sabes cómo hacerlo?', desc: 'No te preocupes — nuestro equipo en tienda puede ayudarte con el respaldo, restablecimiento y desactivación de iCloud.', icon: HelpCircle }
-];
-
-const FAQS = [
-  { q: '¿Cuánto tarda el proceso de valoración?', a: 'El diagnóstico inicial toma entre 30-60 minutos. La evaluación completa y oferta final se entrega el mismo día.' },
-  { q: '¿Qué tipos de equipos reciben?', a: 'Aceptamos iPhone, MacBook, iMac, Apple Watch y otros dispositivos Apple. Evaluamos cada equipo según modelo, estado y funcionalidad.' },
-  { q: '¿Aceptan equipos rotos o con pantalla partida?', a: 'Sí, evaluamos equipos con daños menores. El valor se ajusta según el estado real del dispositivo tras el diagnóstico.' },
-  { q: '¿Puedo vender mi equipo en efectivo sin hacer retoma?', a: 'Sí, ofrecemos opciones de compra directa en efectivo. Contáctanos para conocer los detalles y condiciones.' },
-  { q: '¿Qué garantía tiene el equipo reacondicionado que compre con mi crédito?', a: 'Los equipos reacondicionados incluyen garantía de 12 meses. Todos pasan por un proceso riguroso de revisión y certificación.' },
-  { q: '¿Puedo pedir valoración sin llevar el equipo?', a: 'Puedes solicitar una valoración inicial por fotos o video. La oferta final se confirma después de la inspección física en tienda.' },
-  { q: '¿Puedo usar el crédito en cualquier producto?', a: 'El crédito se puede aplicar a productos nuevos o reacondicionados según tus preferencias. Consulta disponibilidad de modelos.' },
-  { q: '¿Qué pasa si mi dispositivo tiene datos?', a: 'Recomendamos respaldar y borrar todos tus datos antes de entregar el equipo. Nosotros realizamos un borrado seguro adicional.' },
-  { q: '¿Qué pasa si no acepto la oferta?', a: 'Sin problema. Puedes rechazar la oferta sin compromiso. Tu equipo se devuelve en las mismas condiciones.' },
-  { q: '¿El crédito se puede transferir a otra persona?', a: 'El crédito es personal y no transferible. Debe ser utilizado por quien realizó la retoma.' },
-  { q: '¿Puedo entregar más de un equipo?', a: 'Sí, puedes entregar múltiples equipos. Cada uno se evalúa por separado y los créditos se suman.' },
-  { q: '¿Cómo funciona el domicilio?', a: 'Ofrecemos servicio de recogida a domicilio en Bogotá. Coordina con nuestro equipo para agendar según disponibilidad de tu zona.' }
-];
 
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -154,15 +117,14 @@ function Hero() {
   return (
     <section className="relative min-h-screen flex items-center px-6 overflow-hidden pt-20" style={{ background: 'linear-gradient(135deg, #F5F5F7 0%, #FFFFFF 100%)' }} onMouseMove={handleMouseMove}>
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-16 pt-0">
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }} role="status" aria-label="Plan Retoma 2025">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-16">
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border" style={{ borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.1)' }} role="status" aria-label="Plan Retoma 2025">
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }} aria-hidden="true">
               <Sparkles size={16} style={{ color: '#06B6D4' }} />
             </motion.div>
             <span className="text-xs font-semibold tracking-wider" style={{ color: '#1D1D1F' }}>PLAN RETOMA 2025</span>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight mt-0" style={{ color: '#1D1D1F' }} animate={{ y: mousePosition.y * 0.5 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>Renueva tu<br/>equipo</motion.h1>
+          <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight" style={{ color: '#1D1D1F' }} animate={{ y: mousePosition.y * 0.5 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>Renueva tu<br/>equipo</motion.h1>
           <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light max-w-2xl" style={{ color: '#4B5563' }} animate={{ y: mousePosition.y * 0.3 }} transition={{ type: 'spring', stiffness: 100, damping: 30 }}>El Plan Retoma de Pipod te permite entregar tu dispositivo Apple usado (iPhone, Macbook, iMac, SmartWatch) y recibir un descuento por la compra de un equipo nuevo o reacondicionado. Aplicable para clientes particulares y empresas.</motion.p>
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-8">
             <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
@@ -171,16 +133,12 @@ function Hero() {
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold border-2 transition-all" style={{ borderColor: '#0066CC', color: '#0066CC', backgroundColor: 'transparent' }} aria-label="Ver proceso del Plan Retoma">
+              <Button className="px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold border-2 hover:bg-gray-100 transition-all" style={{ borderColor: '#0066CC', color: '#0066CC', backgroundColor: 'transparent' }} aria-label="Ver proceso del Plan Retoma">
                 Ver proceso
               </Button>
             </motion.div>
           </motion.div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="video-container mt-0">
-            <iframe src="https://player.vimeo.com/video/732211917" frameBorder="none" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowFullScreen style={{ border: 'none' }}></iframe>
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -191,10 +149,10 @@ function Products() {
     <section className="py-16 px-8" style={{ backgroundColor: '#F5F5F7' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-16">
-          {[{ label: 'iPhone', img: 'https://images.unsplash.com/photo-1592286927505-1def25115558?w=200&h=200&fit=crop' }, { label: 'MacBook', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&h=200&fit=crop' }, { label: 'iMac', img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop' }, { label: 'iPad', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop' }, { label: 'Apple Watch', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop' }].map((stat, i) => (
+          {PRODUCTS.map((product, i) => (
             <motion.div key={i} initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08, duration: 0.5 }} whileHover={{ scale: 1.08, y: -5 }} className={`cursor-pointer px-4 md:px-6 py-8 md:py-12 text-center transition-colors duration-300 ${i === 2 ? 'md:ml-12' : ''}`}>
-              <Image src={stat.img} alt={stat.label} width={80} height={80} className="mx-auto mb-4 rounded-lg" isZoomed loading="lazy" />
-              <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#1D1D1F' }}>{stat.label}</div>
+              <Image src={product.img} alt={product.label} width={80} height={80} className="mx-auto mb-4 rounded-lg" isZoomed loading="lazy" />
+              <div className="text-4xl md:text-5xl font-bold tracking-wide" style={{ color: '#1D1D1F' }}>{product.label}</div>
             </motion.div>
           ))}
         </div>
@@ -271,7 +229,7 @@ function Steps() {
                 <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }} className="relative z-10 w-28 h-28 rounded-full shadow-2xl hover:shadow-3xl flex items-center justify-center mx-auto mb-10 transition-shadow" style={{ backgroundColor: '#000000', border: '4px solid #1a1a1a' }}>
                   <span className="text-5xl font-black" style={{ color: '#FFFFFF' }}>{step.number}</span>
                 </motion.div>
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }}>{idx + 1}</div>
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }} aria-hidden="true">{idx + 1}</div>
                 <h3 className="text-4xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
                 <p className="text-lg leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
               </motion.div>
@@ -295,7 +253,7 @@ function Checklist() {
           {CHECKLIST.map((item, idx) => (
             <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.05, x: 5 }} className="flex items-start gap-4">
               <motion.div whileHover={{ rotate: 12 }} className="flex-shrink-0 mt-1">
-                {item.icon && <item.icon style={{ color: '#0066CC' }} size={28} />}
+                <item.icon style={{ color: '#0066CC' }} size={28} />
               </motion.div>
               <div className="space-y-2">
                 <h3 className="text-lg font-bold" style={{ color: '#FFFFFF' }}>{item.title}</h3>
@@ -358,10 +316,12 @@ function Newsletter() {
       return;
     }
     setStatus('loading');
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setStatus('success');
       setEmail('');
-      timeoutRef.current = setTimeout(() => setStatus('idle'), 3000);
+      const successTimeout = setTimeout(() => setStatus('idle'), 3000);
+      return () => clearTimeout(successTimeout);
     }, 1500);
   }, [email]);
 
@@ -400,10 +360,10 @@ function Footer() {
       </div>
       <div className="max-w-7xl mx-auto py-16 px-6">
         <div className="flex justify-center space-x-8 mb-12">
-          <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
-          <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
-          <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
-          <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
+          <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
         </div>
         <div className="text-center" style={{ color: '#6E6E6E' }}>
           <p className="text-lg mb-6">© 2025 Pipod. Todos los derechos reservados.</p>
