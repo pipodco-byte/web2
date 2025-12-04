@@ -110,18 +110,17 @@ function Steps() {
     <section id="como-funciona" className="py-32 px-8" style={{ backgroundColor: '#FFFFFF', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#1F2937' }} id="steps-heading">Tres pasos: un nuevo equipo</h2>
+          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }} id="steps-heading">Tres pasos un nuevo equipo</h2>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {STEPS.map((step, idx) => {
             return (
               <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.5 }} whileHover={{ y: -15 }} className="relative text-center group cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
                 <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: 'spring', stiffness: 300 }} className="relative z-10 mx-auto mb-10">
-                  <Chip size="lg" variant="solid" color="primary" className="text-4xl font-black w-28 h-28 shadow-2xl hover:shadow-3xl transition-shadow" style={{ backgroundColor: '#000000', color: '#FFFFFF' }}>
+                  <div className="text-6xl md:text-7xl font-black" style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                     {step.number}
-                  </Chip>
+                  </div>
                 </motion.div>
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 text-8xl font-black -z-10" style={{ color: '#E0E0E0' }} aria-hidden="true">{idx + 1}</div>
                 <h3 className="text-4xl font-black mb-4" style={{ color: '#1F2937' }}>{step.title}</h3>
                 <p className="text-base leading-relaxed" style={{ color: '#4B5563' }}>{step.desc}</p>
               </motion.div>
