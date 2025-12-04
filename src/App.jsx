@@ -24,7 +24,14 @@ const STEPS = [
   { number: '3', title: 'Equipo Nuevo', desc: 'Aplicamos el crédito a la compra de un nuevo o reacondicionado. Te entregamos comprobante.' }
 ];
 
-const CHECKLIST = ['Respaldar tu información', 'Cerrar sesiones activas', 'Desactivar Find My/Buscar mi dispositivo', 'Limpiar el dispositivo', 'Incluir cargador original si es posible'];
+const CHECKLIST = [
+  { title: 'Respalda tu información', desc: 'Realizar un respaldo (backup) y, si lo prefieres, restablecerlo de fábrica.' },
+  { title: 'Desvincula tu cuenta Apple', desc: 'Desactivar "Buscar mi iPhone" y eliminar tu cuenta de iCloud.' },
+  { title: 'Cuida tus accesorios', desc: 'Retirar tarjetas SIM, fundas y accesorios personales.' },
+  { title: 'Recuerda el cargador', desc: 'Incluir el cargador si hace parte de la oferta puede aumentar el valor final.' },
+  { title: 'Documentación', desc: 'Traer factura, documento de propiedad o cajas de producto si lo tienes disponible.' },
+  { title: '¿No sabes cómo hacerlo?', desc: 'No te preocupes — nuestro equipo en tienda puede ayudarte con el respaldo, restablecimiento y desactivación de iCloud.' }
+];
 
 const FAQS = [
   { q: '¿Cuánto tarda el proceso de valoración?', a: 'El diagnóstico inicial toma entre 30-60 minutos. La evaluación completa y oferta final se entrega el mismo día.' },
@@ -210,7 +217,7 @@ function Benefits() {
                     <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#FFFFFF' }}>
                       <CardBody className="flex flex-col items-center text-center">
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
-                          <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
+                          <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
                         </motion.div>
                         <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
                         <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
@@ -228,7 +235,7 @@ function Benefits() {
                     <Card className="p-8 rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#FFFFFF' }}>
                       <CardBody className="flex flex-col items-center text-center">
                         <motion.div whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }} className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F3F4F6' }}>
-                          <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#D1D5DB' }} />
+                          <IconComponent size={40} className={`transition-colors ${item.hoverColor}`} style={{ color: '#000000' }} />
                         </motion.div>
                         <h3 className="text-xl font-black mb-3" style={{ color: '#1F2937' }}>{item.title}</h3>
                         <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
@@ -277,19 +284,18 @@ function Checklist() {
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-24 space-y-8">
           <span className="text-[10px] uppercase font-black tracking-[0.4em]" style={{ color: '#9CA3AF' }}>RECOMENDACIONES</span>
-          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }} id="checklist-heading">Antes de entregar tu equipo</h2>
+          <h2 className="text-6xl md:text-7xl font-black tracking-tight" style={{ color: '#F9FAFB' }} id="checklist-heading">Antes de entregar tu equipo, asegúrate de</h2>
         </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {CHECKLIST.map((item, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.08, x: 5 }}>
-              <Card className="group p-8 rounded-2xl cursor-pointer hover:shadow-lg transition-shadow" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                <CardBody className="flex flex-row items-center gap-5">
-                  <motion.div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(6,182,212,0.2)' }} whileHover={{ rotate: 12 }}>
-                    <CheckCircle style={{ color: '#06B6D4' }} size={24} />
-                  </motion.div>
-                  <span className="text-xl font-semibold" style={{ color: '#D1D5DB' }}>{item}</span>
-                </CardBody>
-              </Card>
+            <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08, duration: 0.4 }} whileHover={{ scale: 1.05, x: 5 }} className="flex items-start gap-4">
+              <motion.div whileHover={{ rotate: 12 }} className="flex-shrink-0 mt-1">
+                <Sparkles style={{ color: '#06B6D4' }} size={28} />
+              </motion.div>
+              <div className="space-y-2">
+                <h3 className="text-lg font-bold" style={{ color: '#FFFFFF' }}>{item.title}</h3>
+                <p className="text-base" style={{ color: '#D1D5DB' }}>{item.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -363,7 +369,7 @@ function Newsletter() {
   return (
     <div className="max-w-xl mx-auto px-6 text-center">
       <h3 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#FFFFFF' }}>Mantente Informado</h3>
-      <p className="mb-10 text-base md:text-lg leading-relaxed" style={{ color: '#D1D5DB' }}>Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#9CA3AF' }}>Sin spam, solo valor</span></p>
+      <p className="mb-10 text-base md:text-lg leading-relaxed" style={{ color: '#000000' }}>Recibe ofertas exclusivas del Plan Retoma y novedades sobre dispositivos Apple.<br/><span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#9CA3AF' }}>Sin spam, solo valor</span></p>
       {status === 'success' ? (
         <div className="p-8 rounded-2xl shadow-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF', fontSize: '1.125rem' }}>✓ ¡Gracias! Revisa tu correo.</div>
       ) : (
@@ -389,10 +395,10 @@ function Footer() {
       </div>
       <div className="max-w-7xl mx-auto py-16 px-6">
         <div className="flex justify-center space-x-8 mb-12">
-          <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
-          <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
-          <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
-          <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#D1D5DB' }} size={28} />
+          <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
+          <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
+          <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
+          <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#000000' }} size={28} />
         </div>
         <div className="text-center" style={{ color: '#6E6E6E' }}>
           <p className="text-lg mb-6">© 2025 Pipod. Todos los derechos reservados.</p>
