@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { Button, Spinner } from '@heroui/react';
+import { Button } from '@heroui/react';
+import { MessageCircle } from 'lucide-react';
 
 export function FooterCTA() {
   return (
-    <section id="contacto" className="relative py-48 px-8 overflow-hidden" style={{ backgroundColor: '#121212' }}>
+    <section id="contacto" className="relative py-16 md:py-20 px-8 overflow-hidden" style={{ backgroundColor: '#121212' }}>
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -20,10 +21,16 @@ export function FooterCTA() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-8"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight" style={{ color: '#FFFFFF', letterSpacing: '-0.03em' }}>
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight whitespace-nowrap" 
+              style={{ 
+                color: '#F9FAFB',
+                letterSpacing: '-0.03em' 
+              }}
+            >
               ¿Listo para renovar?
             </h2>
-            <p className="text-base leading-relaxed" style={{ color: '#D1D5DB' }}>
+            <p className="text-lg md:text-xl leading-relaxed" style={{ color: '#D1D5DB' }}>
               Agenda tu diagnóstico hoy y descubre cuánto vale tu dispositivo Apple.
             </p>
           </motion.div>
@@ -34,22 +41,25 @@ export function FooterCTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col gap-8 h-full justify-center"
+            className="flex justify-start md:justify-start items-start pt-0"
           >
-            <motion.div
-              whileHover={{ scale: 1.08, y: -4 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full"
+            <motion.div 
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
               <Button
+                as="a"
+                href="https://wa.me/573124813094"
                 size="lg"
-                color="primary"
-                variant="shadow"
-                className="w-1/2 text-white text-lg px-12 py-6 font-bold transition-all duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2"
-                style={{ backgroundColor: '#0066CC', borderRadius: '16px' }}
-                aria-label="Agendar cita de retoma"
+                className="text-white px-8 py-6 text-lg font-bold transition-all shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 flex items-center gap-2"
+                style={{ 
+                  backgroundColor: '#25D366',
+                  borderRadius: '16px'
+                }}
+                aria-label="Contactar por WhatsApp"
+                startContent={<MessageCircle size={20} />}
               >
-                Agendar Cita
+                Whatsapp
               </Button>
             </motion.div>
           </motion.div>

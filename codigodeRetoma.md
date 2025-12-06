@@ -1,18 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, Linkedin, HelpCircle } from 'lucide-react';
-import { Button, Input, Card, CardBody, Accordion, AccordionItem, Divider, ButtonGroup, Spinner } from '@heroui/react';
+import { Facebook, Instagram, Twitter, Linkedin, Menu, X, HelpCircle } from 'lucide-react';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input, Card, CardBody, Accordion, AccordionItem, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Image, Chip, ButtonGroup, Spinner, Avatar, Divider } from '@heroui/react';
 import { useSEO } from './hooks/useSEO';
-import { Header } from './components/Header';
 import { FooterCTA } from './components/FooterCTA';
 import { Hero } from './components/Hero';
 import { Products } from './components/Products';
 import { Benefits } from './components/Benefits';
-import AboutPage from './AboutPage';
-import PlanRetomaPage from './PlanRetomaPage';
-import ContactanosPage from './ContactanosPage';
-import BlogPage from './BlogPage';
 import { STEPS, CHECKLIST, FAQS } from './data/constants';
 import './styles/shimmer.css';
 
@@ -23,7 +17,93 @@ const slideInRight = { hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 
 
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+function NavbarComponent() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      
+      const sections = ['beneficios', 'como-funciona', 'recomendaciones', 'faq'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { label: 'Beneficios', href: '#beneficios' },
+    { label: 'Cómo funciona', href: '#como-funciona' },
+    { label: 'Recomendaciones', href: '#recomendaciones' },
+    { label: 'FAQ', href: '#faq' }
+  ];
+
+  const handleNavClick = () => setMobileOpen(false);
+
+  return (
+    <>
+      <Navbar isBordered={scrolled} className={`fixed z-50 transition-all duration-300 ${scrolled ? 'bg-gray-100/95 backdrop-blur-sm' : 'bg-transparent'}`}>
+        <NavbarBrand>
+          <div className={`text-3xl font-bold ${scrolled ? 'text-black' : 'text-black'}`}>Pipod</div>
+        </NavbarBrand>
+        <NavbarContent className="hidden md:flex gap-10" justify="end">
+          {navLinks.map((link) => (
+            <NavbarItem key={link.href}>
+              <a href={link.href} className={`text-sm font-medium text-gray-700 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 rounded ${activeSection === link.href.slice(1) ? 'opacity-100 font-bold' : ''}`}>
+                {link.label}
+              </a>
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+        <NavbarContent className="md:hidden" justify="end">
+          <button onClick={() => setMobileOpen(true)} className="p-2 text-black focus-visible:outline-2 focus-visible:outline-offset-2 rounded" aria-label="Abrir menú">
+            <Menu size={24} />
+          </button>
+        </NavbarContent>
+      </Navbar>
+
+      <Drawer isOpen={mobileOpen} onOpenChange={setMobileOpen} placement="right">
+        <DrawerContent>
+          <DrawerHeader className="flex justify-between items-center">
+            <span className="text-2xl font-bold">Menú</span>
+            <button onClick={() => setMobileOpen(false)} aria-label="Cerrar menú" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+              <X size={24} />
+            </button>
+          </DrawerHeader>
+          <DrawerBody>
+            <div className="space-y-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className={`block text-lg font-medium py-2 px-4 rounded-lg transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                    activeSection === link.href.slice(1)
+                      ? 'bg-blue-500 text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
 
 function Steps() {
   return (
@@ -172,62 +252,28 @@ function Footer() {
       <div className="py-32">
         <Newsletter />
       </div>
-    </footer>
-  );
-}
-
-function PipodFooter() {
-  return (
-    <footer style={{ backgroundColor: '#000000' }} className="text-white">
+      <Divider className="bg-gray-800" />
       <div className="max-w-7xl mx-auto py-16 px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div>
-            <h4 className="font-bold mb-4">Soporte / Ayuda</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-blue-400">Contáctanos</a></li>
-              <li><a href="#" className="hover:text-blue-400">Preguntas Frecuentes</a></li>
-              <li><a href="#" className="hover:text-blue-400">Política de Devoluciones</a></li>
-              <li><a href="#" className="hover:text-blue-400">Términos y Condiciones</a></li>
-              <li><a href="#" className="hover:text-blue-400">Política de Privacidad</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold mb-4">Tienda</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-blue-400">PLAN RETOMA</a></li>
-              <li><a href="#" className="hover:text-blue-400">NUEVOS</a></li>
-              <li><a href="#" className="hover:text-blue-400">USADOS</a></li>
-              <li><a href="#" className="hover:text-blue-400">ACCESORIOS</a></li>
-              <li><a href="#" className="hover:text-blue-400">BLOG</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold mb-4">Servicio Técnico Apple</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-blue-400">iPhones</a></li>
-              <li><a href="#" className="hover:text-blue-400">iPads</a></li>
-              <li><a href="#" className="hover:text-blue-400">iMacs</a></li>
-              <li><a href="#" className="hover:text-blue-400">MacBooks</a></li>
-              <li><a href="#" className="hover:text-blue-400">SmartWatch</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold mb-4">SÍGUENOS</h4>
-            <div className="flex gap-4 mb-6">
-              <a href="#" aria-label="Facebook" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
-                <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={24} />
-              </a>
-              <a href="#" aria-label="Instagram" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
-                <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={24} />
-              </a>
-              <a href="#" aria-label="Twitter" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
-                <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={24} />
-              </a>
-              <a href="#" aria-label="LinkedIn" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
-                <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={24} />
-              </a>
-            </div>
-            <p className="text-sm text-gray-500">© 2025 Pipod. Todos los derechos reservados.</p>
+        <div className="flex justify-center space-x-8 mb-12">
+          <a href="#" aria-label="Facebook" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Facebook className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
+          <a href="#" aria-label="Instagram" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Instagram className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
+          <a href="#" aria-label="Twitter" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Twitter className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
+          <a href="#" aria-label="LinkedIn" className="focus-visible:outline-2 focus-visible:outline-offset-2 rounded">
+            <Linkedin className="cursor-pointer transition-all hover:scale-125" style={{ color: '#FFFFFF' }} size={28} />
+          </a>
+        </div>
+        <div className="text-center" style={{ color: '#6E6E6E' }}>
+          <p className="text-lg mb-6">© 2025 Pipod. Todos los derechos reservados.</p>
+          <div className="space-x-8 text-sm uppercase tracking-[0.15em]">
+            <a href="#" className="transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 rounded" style={{ color: '#6E6E6E' }}>Privacidad</a>
+            <a href="#" className="transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 rounded" style={{ color: '#6E6E6E' }}>Términos</a>
+            <a href="#" className="transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 rounded" style={{ color: '#6E6E6E' }}>Contacto</a>
           </div>
         </div>
       </div>
@@ -236,46 +282,88 @@ function PipodFooter() {
 }
 
 export default function App() {
-  const location = useLocation();
-  const pathname = location.pathname;
-
-  const isNosotros = pathname === '/nosotros';
-  const isPlanRetoma = pathname === '/plan-retoma';
-  const isContactanos = pathname === '/contactanos';
-  const isBlog = pathname === '/blog';
-
   useSEO({
-    title: isNosotros ? 'Pipod - Nosotros' : isPlanRetoma ? 'Pipod - Plan Retoma' : isContactanos ? 'Pipod - Contáctanos' : isBlog ? 'Pipod - Blog' : 'Pipod - Plan Retoma de Dispositivos Apple',
-    description: isNosotros ? 'Conoce la historia, visión, misión y valores de Pipod.' : isPlanRetoma ? 'Plan Retoma de Pipod - Entrega tu dispositivo usado y recibe crédito.' : isContactanos ? 'Contáctanos - Ponte en contacto con Pipod.' : isBlog ? 'Blog de Pipod - Artículos y noticias sobre Apple.' : 'Entrega tu dispositivo Apple usado (iPhone, MacBook, iMac, Apple Watch) y recibe crédito para comprar equipo nuevo o reacondicionado. Proceso transparente, sostenible y flexible.',
-    keywords: isNosotros ? 'Pipod, nosotros, historia, visión, misión, valores' : isPlanRetoma ? 'plan retoma, dispositivos usados, crédito' : isContactanos ? 'contacto, contáctanos, Pipod' : isBlog ? 'blog, artículos, noticias, Apple' : 'retoma, iPhone, MacBook, Apple, dispositivos usados, crédito, descuento, Bogotá, Plan Retoma',
+    title: 'Pipod - Plan Retoma de Dispositivos Apple',
+    description: 'Entrega tu dispositivo Apple usado (iPhone, MacBook, iMac, Apple Watch) y recibe crédito para comprar equipo nuevo o reacondicionado. Proceso transparente, sostenible y flexible.',
+    keywords: 'retoma, iPhone, MacBook, Apple, dispositivos usados, crédito, descuento, Bogotá, Plan Retoma',
     ogImage: 'https://pipod.co/og-image.jpg',
-    ogUrl: `https://pipod.co${pathname}`
+    ogUrl: 'https://pipod.co'
   });
 
   return (
     <motion.div className="font-inter antialiased" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-      <Header />
-      {isNosotros ? (
-        <AboutPage />
-      ) : isPlanRetoma ? (
-        <PlanRetomaPage />
-      ) : isContactanos ? (
-        <ContactanosPage />
-      ) : isBlog ? (
-        <BlogPage />
-      ) : (
-        <>
-          <Hero />
-          <Products />
-          <Benefits />
-          <Steps />
-          <Checklist />
-          <FAQ />
-          <FooterCTA />
-          <Footer />
-          <PipodFooter />
-        </>
-      )}
+      <NavbarComponent />
+      <Hero />
+      <Products />
+      <Benefits />
+      <Steps />
+      <Checklist />
+      <FAQ />
+      <FooterCTA />
+      <Footer />
     </motion.div>
   );
+}
+
+/// index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-inter;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  iframe {
+    @apply w-full h-auto;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .video-container {
+    @apply w-full h-screen;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .video-container iframe {
+    @apply w-full h-full;
+  }
 }
